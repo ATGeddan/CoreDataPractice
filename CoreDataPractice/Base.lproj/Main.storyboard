@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Home TableVC-->
+        <!--Patients-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MyHomeTableVC" customModule="CoreDataPractice" customModuleProvider="target" sceneMemberID="viewController">
@@ -70,17 +70,36 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="iVo-IJ-6aU"/>
+                    <navigationItem key="navigationItem" title="Patients" id="iVo-IJ-6aU"/>
                     <connections>
                         <outlet property="ageField" destination="yrc-EL-InL" id="NYr-7O-WmT"/>
                         <outlet property="genderSwitch" destination="8sc-Vw-eXm" id="zL2-9y-ord"/>
                         <outlet property="homeTableView" destination="eY0-ax-AtP" id="HUU-o4-vtt"/>
                         <outlet property="nameField" destination="NYx-gf-u2U" id="pko-pS-gEX"/>
+                        <segue destination="HBy-Fd-5Pl" kind="show" identifier="chosePatient" id="Yn7-Mi-wNV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1071.2" y="133.5832083958021"/>
+        </scene>
+        <!--Appointments Table View Controller-->
+        <scene sceneID="3dU-3R-Sh8">
+            <objects>
+                <tableViewController id="HBy-Fd-5Pl" customClass="AppointmentsTableViewController" customModule="CoreDataPractice" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WKc-ZR-qJo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <outlet property="dataSource" destination="HBy-Fd-5Pl" id="LFV-fL-9qH"/>
+                            <outlet property="delegate" destination="HBy-Fd-5Pl" id="XnJ-45-t95"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="40B-RJ-LUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1828" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8lp-BQ-IHN">

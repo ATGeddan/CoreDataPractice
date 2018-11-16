@@ -22,6 +22,7 @@ class Patient: NSManagedObject {
     if let gender2 = info["gender"] {
       gender = gender2
     }
+    date = Date()
     do {
       try context.save()
       print("Saved the Patient Successfuly")

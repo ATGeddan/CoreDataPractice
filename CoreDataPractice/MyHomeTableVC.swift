@@ -1,15 +1,15 @@
 //
-//  SmashTweetersTableViewController.swift
-//  Smashtag
+//  MyHomeTableVC.swift
+//  CoreDataPractice
 //
-//  Created by Michel Deiman on 26/03/2017.
-//  Copyright © 2017 Michel Deiman. All rights reserved.
+//  Created by Ahmed Eltabbal on 11/12/18.
+//  Copyright © 2018 Ahmed Eltabbal. All rights reserved.
 //
+
 import UIKit
 import CoreData
 
-class MyHomeTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
-{
+class MyHomeTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
   @IBOutlet weak var genderSwitch: UISwitch!
   @IBOutlet weak var ageField: UITextField!
@@ -30,8 +30,8 @@ class MyHomeTableVC: UIViewController, UITableViewDataSource, UITableViewDelegat
   func updateUI()  {
     let context = container.viewContext
     let request: NSFetchRequest<Patient> = Patient.fetchRequest()
-    let selector = #selector(NSString.caseInsensitiveCompare(_:))
-    request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: selector)]
+//    let selector = #selector(NSString.caseInsensitiveCompare(_:))
+    request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
 //  request.predicate = NSPredicate(format: "" , )
     fetchedResultsController = NSFetchedResultsController<Patient>(
       fetchRequest: request,
@@ -55,12 +55,11 @@ class MyHomeTableVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     return cell
   }
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-  {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if let patients = fetchedResultsController?.fetchedObjects {
       return patients.count
     } else {
-      return 1
+      return 0
     }
   }
   
@@ -71,6 +70,12 @@ class MyHomeTableVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         context.delete(patient)
         try? context.save()
       }
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let patient = fetchedResultsController?.object(at: indexPath) {
+      performSegue(withIdentifier: "chosePatient", sender: patient)
     }
   }
   
@@ -88,7 +93,15 @@ class MyHomeTableVC: UIViewController, UITableViewDataSource, UITableViewDelegat
       let info = ["name":nameField.text!,
                   "age":ageField.text!,
                   "gender":gender]
-      patient.savePatientWithInfo(info: info, context: container.viewContext)
+      nameField.text = ""
+      ageField.text = ""
+      patient.savePatientWithInfo(info: info, context: context)
+    }
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let destination = segue.destination as? AppointmentsTableViewController, let thePatient = sender as? Patient {
+      destination.patient = thePatient
     }
   }
   
