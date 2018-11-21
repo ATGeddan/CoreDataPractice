@@ -41,5 +41,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This allows you to save Images on your device.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This allows &quot;APP NAME&quot; to add images or X-rays.</string>
 </dict>
 </plist>

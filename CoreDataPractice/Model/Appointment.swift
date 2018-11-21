@@ -13,9 +13,4 @@ class Appointment: NSManagedObject {
   
   
   
-  
-  
-  
-  
-  
 }

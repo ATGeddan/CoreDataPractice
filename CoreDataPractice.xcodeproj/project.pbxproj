@@ -7,23 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		260A312921A1B0660035B747 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A312821A1B0660035B747 /* Picture.swift */; };
+		260A312B21A1B38E0035B747 /* AppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A312A21A1B38E0035B747 /* AppointmentVC.swift */; };
+		260A312D21A1B7C40035B747 /* SLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A312C21A1B7C40035B747 /* SLImageView.swift */; };
 		262370672198A51400F2E7DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262370662198A51400F2E7DF /* AppDelegate.swift */; };
 		2623706C2198A51400F2E7DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2623706A2198A51400F2E7DF /* Main.storyboard */; };
 		2623706F2198A51400F2E7DF /* CoreDataPractice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2623706D2198A51400F2E7DF /* CoreDataPractice.xcdatamodeld */; };
 		262370712198A51600F2E7DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 262370702198A51600F2E7DF /* Assets.xcassets */; };
 		262370742198A51600F2E7DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 262370722198A51600F2E7DF /* LaunchScreen.storyboard */; };
 		2623707C2198AD1700F2E7DF /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2623707B2198AD1700F2E7DF /* Patient.swift */; };
-		262370802199C5C000F2E7DF /* MyHomeTableVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2623707F2199C5C000F2E7DF /* MyHomeTableVCExtension.swift */; };
-		262370842199D4DF00F2E7DF /* homeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262370822199D4DF00F2E7DF /* homeCell.swift */; };
-		262370852199D4DF00F2E7DF /* homeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 262370832199D4DF00F2E7DF /* homeCell.xib */; };
-		262370872199DF7900F2E7DF /* MyHomeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262370862199DF7900F2E7DF /* MyHomeTableVC.swift */; };
+		262370802199C5C000F2E7DF /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2623707F2199C5C000F2E7DF /* CoreDataTableViewController.swift */; };
+		262370842199D4DF00F2E7DF /* PatientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262370822199D4DF00F2E7DF /* PatientCell.swift */; };
+		262370852199D4DF00F2E7DF /* PatientCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 262370832199D4DF00F2E7DF /* PatientCell.xib */; };
+		262370872199DF7900F2E7DF /* PatientsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262370862199DF7900F2E7DF /* PatientsTableVC.swift */; };
+		26770C3C21A08C4100BA3039 /* AddPatientVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26770C3B21A08C4100BA3039 /* AddPatientVC.swift */; };
 		26946E6A219C7198008B5311 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26946E69219C7198008B5311 /* Appointment.swift */; };
 		26946E6C219C7B3C008B5311 /* AppointmentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26946E6B219C7B3C008B5311 /* AppointmentsTableViewController.swift */; };
-		26946E70219C7F2F008B5311 /* appointmentAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26946E6E219C7F2F008B5311 /* appointmentAddCell.swift */; };
-		26946E71219C7F2F008B5311 /* appointmentAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26946E6F219C7F2F008B5311 /* appointmentAddCell.xib */; };
+		26C95B9921A301EC004D7395 /* CachingImagesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C95B9821A301EC004D7395 /* CachingImagesExtension.swift */; };
+		26C95B9B21A468FF004D7395 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C95B9A21A468FF004D7395 /* HomeVC.swift */; };
+		26D627A5219EE6E800B90741 /* AddOrEditAppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D627A4219EE6E800B90741 /* AddOrEditAppointmentVC.swift */; };
+		26D627A7219EEC9400B90741 /* SkyFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D627A6219EEC9400B90741 /* SkyFloatingTextField.swift */; };
+		7F398486358E1600F69DEAF3 /* Pods_CoreDataPractice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44383FD66C71405ED66CF78A /* Pods_CoreDataPractice.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0973153BCFB6A46D4D15ED64 /* Pods-CoreDataPractice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDataPractice.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDataPractice/Pods-CoreDataPractice.release.xcconfig"; sourceTree = "<group>"; };
+		260A312821A1B0660035B747 /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
+		260A312A21A1B38E0035B747 /* AppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentVC.swift; sourceTree = "<group>"; };
+		260A312C21A1B7C40035B747 /* SLImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLImageView.swift; sourceTree = "<group>"; };
 		262370632198A51400F2E7DF /* CoreDataPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		262370662198A51400F2E7DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; usesTabs = 0; };
 		2623706B2198A51400F2E7DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -32,14 +43,19 @@
 		262370732198A51600F2E7DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		262370752198A51600F2E7DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2623707B2198AD1700F2E7DF /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
-		2623707F2199C5C000F2E7DF /* MyHomeTableVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeTableVCExtension.swift; sourceTree = "<group>"; };
-		262370822199D4DF00F2E7DF /* homeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeCell.swift; sourceTree = "<group>"; };
-		262370832199D4DF00F2E7DF /* homeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = homeCell.xib; sourceTree = "<group>"; };
-		262370862199DF7900F2E7DF /* MyHomeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeTableVC.swift; sourceTree = "<group>"; };
+		2623707F2199C5C000F2E7DF /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
+		262370822199D4DF00F2E7DF /* PatientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCell.swift; sourceTree = "<group>"; };
+		262370832199D4DF00F2E7DF /* PatientCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientCell.xib; sourceTree = "<group>"; };
+		262370862199DF7900F2E7DF /* PatientsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsTableVC.swift; sourceTree = "<group>"; };
+		26770C3B21A08C4100BA3039 /* AddPatientVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPatientVC.swift; sourceTree = "<group>"; };
 		26946E69219C7198008B5311 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		26946E6B219C7B3C008B5311 /* AppointmentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsTableViewController.swift; sourceTree = "<group>"; };
-		26946E6E219C7F2F008B5311 /* appointmentAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appointmentAddCell.swift; sourceTree = "<group>"; };
-		26946E6F219C7F2F008B5311 /* appointmentAddCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = appointmentAddCell.xib; sourceTree = "<group>"; };
+		26C95B9821A301EC004D7395 /* CachingImagesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingImagesExtension.swift; sourceTree = "<group>"; };
+		26C95B9A21A468FF004D7395 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		26D627A4219EE6E800B90741 /* AddOrEditAppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditAppointmentVC.swift; sourceTree = "<group>"; };
+		26D627A6219EEC9400B90741 /* SkyFloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyFloatingTextField.swift; sourceTree = "<group>"; };
+		44383FD66C71405ED66CF78A /* Pods_CoreDataPractice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDataPractice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F7DD7F3B2FCD22DCB83E7FE /* Pods-CoreDataPractice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDataPractice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDataPractice/Pods-CoreDataPractice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F398486358E1600F69DEAF3 /* Pods_CoreDataPractice.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +75,8 @@
 			children = (
 				262370652198A51400F2E7DF /* CoreDataPractice */,
 				262370642198A51400F2E7DF /* Products */,
+				C6CEC1F092B19E5591412C0A /* Pods */,
+				C674F4D0272A062B152AA6A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,19 +91,15 @@
 		262370652198A51400F2E7DF /* CoreDataPractice */ = {
 			isa = PBXGroup;
 			children = (
-				26946E6D219C7F11008B5311 /* appointmentAddCell */,
+				26D627A3219EE65E00B90741 /* Storyboards */,
+				26D627A2219EE65200B90741 /* Extensions */,
+				26D627A1219EE64300B90741 /* Controllers */,
+				26D627A0219EE62400B90741 /* Model */,
 				262370812199D4C300F2E7DF /* homeCell */,
-				262370862199DF7900F2E7DF /* MyHomeTableVC.swift */,
-				26946E6B219C7B3C008B5311 /* AppointmentsTableViewController.swift */,
-				2623707F2199C5C000F2E7DF /* MyHomeTableVCExtension.swift */,
-				2623706A2198A51400F2E7DF /* Main.storyboard */,
 				262370662198A51400F2E7DF /* AppDelegate.swift */,
 				262370702198A51600F2E7DF /* Assets.xcassets */,
 				262370722198A51600F2E7DF /* LaunchScreen.storyboard */,
 				262370752198A51600F2E7DF /* Info.plist */,
-				2623706D2198A51400F2E7DF /* CoreDataPractice.xcdatamodeld */,
-				2623707B2198AD1700F2E7DF /* Patient.swift */,
-				26946E69219C7198008B5311 /* Appointment.swift */,
 			);
 			path = CoreDataPractice;
 			sourceTree = "<group>";
@@ -92,19 +107,70 @@
 		262370812199D4C300F2E7DF /* homeCell */ = {
 			isa = PBXGroup;
 			children = (
-				262370822199D4DF00F2E7DF /* homeCell.swift */,
-				262370832199D4DF00F2E7DF /* homeCell.xib */,
+				262370822199D4DF00F2E7DF /* PatientCell.swift */,
+				262370832199D4DF00F2E7DF /* PatientCell.xib */,
 			);
 			path = homeCell;
 			sourceTree = "<group>";
 		};
-		26946E6D219C7F11008B5311 /* appointmentAddCell */ = {
+		26D627A0219EE62400B90741 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				26946E6E219C7F2F008B5311 /* appointmentAddCell.swift */,
-				26946E6F219C7F2F008B5311 /* appointmentAddCell.xib */,
+				2623707B2198AD1700F2E7DF /* Patient.swift */,
+				26946E69219C7198008B5311 /* Appointment.swift */,
+				260A312821A1B0660035B747 /* Picture.swift */,
+				2623706D2198A51400F2E7DF /* CoreDataPractice.xcdatamodeld */,
 			);
-			path = appointmentAddCell;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		26D627A1219EE64300B90741 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				262370862199DF7900F2E7DF /* PatientsTableVC.swift */,
+				26946E6B219C7B3C008B5311 /* AppointmentsTableViewController.swift */,
+				26D627A4219EE6E800B90741 /* AddOrEditAppointmentVC.swift */,
+				26770C3B21A08C4100BA3039 /* AddPatientVC.swift */,
+				260A312A21A1B38E0035B747 /* AppointmentVC.swift */,
+				26C95B9A21A468FF004D7395 /* HomeVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		26D627A2219EE65200B90741 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2623707F2199C5C000F2E7DF /* CoreDataTableViewController.swift */,
+				26D627A6219EEC9400B90741 /* SkyFloatingTextField.swift */,
+				260A312C21A1B7C40035B747 /* SLImageView.swift */,
+				26C95B9821A301EC004D7395 /* CachingImagesExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		26D627A3219EE65E00B90741 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2623706A2198A51400F2E7DF /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		C674F4D0272A062B152AA6A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				44383FD66C71405ED66CF78A /* Pods_CoreDataPractice.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C6CEC1F092B19E5591412C0A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6F7DD7F3B2FCD22DCB83E7FE /* Pods-CoreDataPractice.debug.xcconfig */,
+				0973153BCFB6A46D4D15ED64 /* Pods-CoreDataPractice.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,9 +180,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 262370782198A51600F2E7DF /* Build configuration list for PBXNativeTarget "CoreDataPractice" */;
 			buildPhases = (
+				CAA6C993EB772A1937CC7BCA /* [CP] Check Pods Manifest.lock */,
 				2623705F2198A51400F2E7DF /* Sources */,
 				262370602198A51400F2E7DF /* Frameworks */,
 				262370612198A51400F2E7DF /* Resources */,
+				0BB8408C712870D69E9E263F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -167,28 +235,75 @@
 			files = (
 				262370742198A51600F2E7DF /* LaunchScreen.storyboard in Resources */,
 				262370712198A51600F2E7DF /* Assets.xcassets in Resources */,
-				262370852199D4DF00F2E7DF /* homeCell.xib in Resources */,
-				26946E71219C7F2F008B5311 /* appointmentAddCell.xib in Resources */,
+				262370852199D4DF00F2E7DF /* PatientCell.xib in Resources */,
 				2623706C2198A51400F2E7DF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0BB8408C712870D69E9E263F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CoreDataPractice/Pods-CoreDataPractice-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CVCalendar/CVCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CVCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoreDataPractice/Pods-CoreDataPractice-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CAA6C993EB772A1937CC7BCA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoreDataPractice-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2623705F2198A51400F2E7DF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				260A312921A1B0660035B747 /* Picture.swift in Sources */,
 				2623707C2198AD1700F2E7DF /* Patient.swift in Sources */,
 				26946E6C219C7B3C008B5311 /* AppointmentsTableViewController.swift in Sources */,
-				262370842199D4DF00F2E7DF /* homeCell.swift in Sources */,
+				262370842199D4DF00F2E7DF /* PatientCell.swift in Sources */,
+				26C95B9921A301EC004D7395 /* CachingImagesExtension.swift in Sources */,
+				26D627A5219EE6E800B90741 /* AddOrEditAppointmentVC.swift in Sources */,
 				2623706F2198A51400F2E7DF /* CoreDataPractice.xcdatamodeld in Sources */,
 				262370672198A51400F2E7DF /* AppDelegate.swift in Sources */,
-				262370872199DF7900F2E7DF /* MyHomeTableVC.swift in Sources */,
+				262370872199DF7900F2E7DF /* PatientsTableVC.swift in Sources */,
+				26C95B9B21A468FF004D7395 /* HomeVC.swift in Sources */,
+				26D627A7219EEC9400B90741 /* SkyFloatingTextField.swift in Sources */,
+				260A312D21A1B7C40035B747 /* SLImageView.swift in Sources */,
+				26770C3C21A08C4100BA3039 /* AddPatientVC.swift in Sources */,
 				26946E6A219C7198008B5311 /* Appointment.swift in Sources */,
-				262370802199C5C000F2E7DF /* MyHomeTableVCExtension.swift in Sources */,
-				26946E70219C7F2F008B5311 /* appointmentAddCell.swift in Sources */,
+				260A312B21A1B38E0035B747 /* AppointmentVC.swift in Sources */,
+				262370802199C5C000F2E7DF /* CoreDataTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +447,7 @@
 		};
 		262370792198A51600F2E7DF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F7DD7F3B2FCD22DCB83E7FE /* Pods-CoreDataPractice.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -350,6 +466,7 @@
 		};
 		2623707A2198A51600F2E7DF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0973153BCFB6A46D4D15ED64 /* Pods-CoreDataPractice.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
