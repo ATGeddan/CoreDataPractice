@@ -19,6 +19,8 @@ class AddOrEditAppointmentVC: UIViewController, UITextViewDelegate {
   lazy var picker = UIDatePicker()
   var chosenDate: Date?
   var patient: Patient!
+  var appointment: Appointment!
+  var delegate: DidEditAppointmentDelegate!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,8 +32,18 @@ class AddOrEditAppointmentVC: UIViewController, UITextViewDelegate {
     
     let rightButton = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveAppointment))
     navigationItem.rightBarButtonItem = rightButton
-
+    recieveAppointmentToEdit()
     createDateTimePicker()
+  }
+  
+  private func recieveAppointmentToEdit() {
+    if appointment != nil {
+      dateField.text = DateFormatter.localizedString(from: appointment.date!, dateStyle: .medium, timeStyle: .short)
+      chosenDate = appointment.date
+      operatorField.text = appointment.theOperator
+      assistantField.text = appointment.assistant ?? ""
+      procedureView.text = appointment.procedure
+    }
   }
   
   func textViewDidBeginEditing(_ textView: UITextView) {
@@ -69,16 +81,27 @@ class AddOrEditAppointmentVC: UIViewController, UITextViewDelegate {
       present(alert,animated: true)
       return
     }
-    guard let context = patient.managedObjectContext else {return}
-    let appointment = Appointment(context: context)
+    var context: NSManagedObjectContext!
+    if appointment == nil {
+      context = patient.managedObjectContext
+      appointment = Appointment(context: context)
+      appointment.thePatient = patient
+    } else {
+      context = appointment.managedObjectContext
+    }
     appointment.date = chosenDate
     appointment.theOperator = operatorField.text
     appointment.assistant = assistantField.text
-    appointment.procedure = procedureView.text
-    appointment.thePatient = patient
-    appointment.id = String(NSTimeIntervalSince1970)
+    appointment.procedure = procedureView.text 
+    let dateformatter = DateFormatter()
+    dateformatter.dateFormat = "dd.MM.yy"
+    appointment.comparisonDate = dateformatter.string(from: chosenDate!)
+    appointment.id = UUID().uuidString
     do {
       try context.save()
+      if delegate != nil {
+        delegate.didEditAppointment(appointment)
+      }
       navigationController?.popViewController(animated: true)
     } catch {
       print(error)

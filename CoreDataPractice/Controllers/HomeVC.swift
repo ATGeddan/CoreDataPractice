@@ -19,9 +19,12 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
   }
   @IBOutlet weak var calendarMenuView: CVCalendarMenuView!
   @IBOutlet weak var calendarView: CVCalendarView!
+  @IBOutlet weak var showAppointsBtn: UIButton!
+  @IBOutlet weak var buttonsToBottom: NSLayoutConstraint!
   
   let container = AppDelegate.persistentContainer
   var appointDates = [CVDate]()
+  var highlightedDate: Date!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,6 +37,11 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
 
   }
   
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(true)
+    toggleShowAppointsButton(hasAppoints: false)
+  }
+  
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     calendarMenuView.commitMenuViewUpdate()
@@ -44,6 +52,9 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
     calendarView.calendarDelegate = self
     calendarMenuView.menuViewDelegate = self
     calendarView.animatorDelegate = self
+    calendarView.appearance.dayLabelWeekdaySelectedBackgroundColor = #colorLiteral(red: 0.6851043456, green: 0.2821017894, blue: 0.2821017894, alpha: 1)
+    calendarView.appearance.dayLabelPresentWeekdaySelectedBackgroundColor = #colorLiteral(red: 0.6121311865, green: 0.006001286143, blue: 0.006001286143, alpha: 1)
+    calendarView.appearance.dayLabelPresentWeekdayTextColor = #colorLiteral(red: 0.6121311865, green: 0.006001286143, blue: 0.006001286143, alpha: 1)
   }
   
   private func fetchAppointments() {
@@ -81,21 +92,44 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
   }
   
   func didSelectDayView(_ dayView: DayView, animationDidFinish: Bool) {
-    if dayView.dotMarkers != [] {
+    if hasAppointments(dayView) {
+      highlightedDate = dayView.date.convertedDate()
       toggleShowAppointsButton(hasAppoints: true)
     } else {
+      highlightedDate = nil
       toggleShowAppointsButton(hasAppoints: false)
     }
+  }
+  
+  private func hasAppointments(_ dayView: DayView) -> Bool {
+    for date in appointDates {
+      if date.commonDescription == dayView.date.commonDescription {
+        return true
+      }
+    }
+    return false
   }
   
   private func toggleShowAppointsButton(hasAppoints: Bool) {
     if hasAppoints {
       // Show the Button
-      print("Showing Button")
+      UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {[weak self] in
+        self?.buttonsToBottom.constant = 45
+        self?.view.layoutIfNeeded()
+      }) {[weak self] ended in
+        if ended {
+          self?.showAppointsBtn.isEnabled = true
+        }
+      }
     } else {
       // Hide the Button
-      print("Hiding Button")
+      showAppointsBtn.isEnabled = false
+      UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {[weak self] in
+        self?.buttonsToBottom.constant = 135
+        self?.view.layoutIfNeeded()
+      })
     }
+    
   }
   
   func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool {
@@ -108,7 +142,7 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
   }
   
   func dotMarker(colorOnDayView dayView: DayView) -> [UIColor] {
-    return [.blue,.blue]
+    return [#colorLiteral(red: 0.6121311865, green: 0.006001286143, blue: 0.006001286143, alpha: 1),#colorLiteral(red: 0.6121311865, green: 0.006001286143, blue: 0.006001286143, alpha: 1),#colorLiteral(red: 0.6121311865, green: 0.006001286143, blue: 0.006001286143, alpha: 1)]
   }
   
   func dotMarker(sizeOnDayView dayView: DayView) -> CGFloat {
@@ -138,4 +172,15 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
     return monthName
   }
   
+  
+  @IBAction func showAppointsClicked(_ sender: UIButton) {
+    performSegue(withIdentifier: "showAppointments", sender: nil)
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+    if let destination = segue.destination as? AppointmentsTableViewController, let theDate = highlightedDate {
+      destination.dateFromCalendar = theDate
+    }
+  }
 }

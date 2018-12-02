@@ -2,21 +2,28 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Appointment" representedClassName=".Appointment" syncable="YES" codeGenerationType="category">
         <attribute name="assistant" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comparisonDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="procedure" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="theOperator" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="pictures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Picture" inverseName="theAppointment" inverseEntity="Picture" syncable="YES"/>
+        <relationship name="pictures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Picture" inverseName="theAppointment" inverseEntity="Picture" syncable="YES"/>
         <relationship name="thePatient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="appointments" inverseEntity="Patient" syncable="YES"/>
+    </entity>
+    <entity name="MedicalHistory" representedClassName=".MedicalHistory" syncable="YES" codeGenerationType="category">
+        <relationship name="thePatinet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="history" inverseEntity="Patient" syncable="YES"/>
     </entity>
     <entity name="Patient" representedClassName=".Patient" syncable="YES" codeGenerationType="category">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastVisitDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="phone" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="appointments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Appointment" inverseName="thePatient" inverseEntity="Appointment" syncable="YES"/>
+        <relationship name="history" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MedicalHistory" inverseName="thePatinet" inverseEntity="MedicalHistory" syncable="YES"/>
         <relationship name="pictures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Picture" inverseName="thePatient" inverseEntity="Picture" syncable="YES"/>
     </entity>
     <entity name="Picture" representedClassName=".Picture" syncable="YES" codeGenerationType="category">
@@ -27,8 +34,9 @@
         <relationship name="thePatient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="pictures" inverseEntity="Patient" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Appointment" positionX="156.1875" positionY="-41.83984375" width="128" height="148"/>
-        <element name="Patient" positionX="-220.8125" positionY="-26.41015625" width="128" height="163"/>
+        <element name="Appointment" positionX="158.54296875" positionY="-41.75390625" width="128" height="163"/>
+        <element name="MedicalHistory" positionX="-223.375" positionY="252.15625" width="128" height="58"/>
+        <element name="Patient" positionX="-220.8125" positionY="-26.41015625" width="128" height="208"/>
         <element name="Picture" positionX="-30.62890625" positionY="202.3125" width="128" height="118"/>
     </elements>
 </model>

@@ -10,8 +10,13 @@ import UIKit
 import CoreData
 import Photos
 
-class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+protocol DidEditAppointmentDelegate {
+  func didEditAppointment(_ appoint: Appointment)
+}
+
+class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DidEditAppointmentDelegate {
   
+  @IBOutlet weak var addPhotoBtn2: UIButton!
   @IBOutlet weak var addPhotoBtn: UIButton!
   @IBOutlet weak var picsScrollView: UIScrollView!
   @IBOutlet weak var procedureView: UITextView!
@@ -29,8 +34,14 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupEditButton()
     setupAppointmentData()
     fetchAppointmentPictures()
+  }
+  
+  func didEditAppointment(_ appoint: Appointment) {
+    appointment = appoint
+    setupAppointmentData()
   }
   
   private func setupAppointmentData() {
@@ -43,6 +54,17 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     operatorLabel.text = "Operator: \(theOperator)"
     assistantLabel.text = "Assistant: \(assistant)"
     procedureView.text = procedure
+  }
+  
+  private func setupEditButton() {
+    let rightButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(goToEdit))
+    navigationItem.rightBarButtonItem = rightButton
+    // Hide secondery add button
+    addPhotoBtn2.alpha = 0
+  }
+  
+  @objc private func goToEdit() {
+    performSegue(withIdentifier: "toEditAppoint", sender: appointment)
   }
   
   private func fetchAppointmentPictures() {
@@ -73,43 +95,41 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
   
   func relayPictures(_ thisImg: SLImageView) {
     picsScrollView.addSubview(thisImg)
-    UIView.animate(withDuration: 0.3, animations: {[weak self] in
+    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {[weak self] in
       self?.view.layoutIfNeeded()
       thisImg.alpha = 1
       if let pictures = self?.picsScrollView.subviews {
         for pic in pictures {
           if let thisPic = pic as? SLImageView, thisPic.imageID >= 0 {
             thisPic.imageID += 1
-            thisPic.center.x += 182.5
+            thisPic.center.x += 260
           }
         }
       }
     }) { [weak self]_ in
       thisImg.imageID = 0
-      self?.scrollWidth.constant = CGFloat(((self?.picsScrollView.subviews.count)! - 2) * 187)
+      self?.scrollWidth.constant = CGFloat((((self?.picsScrollView.subviews.count)! - 2) * 260) + 15)
     }
-//    addPhotoBtn.alpha = 0
+    addPhotoBtn.alpha = 0
+    addPhotoBtn2.alpha = 1
   }
   
   private func addPicsToScrollView(_ array: [Picture]) {
-//      addPhotoBtn.alpha = 0
-      for i in 0..<array.count {
-        let currentImage = array[i]
-        let scrollheight = picsScrollView.frame.size.height
-        let newX =  182.5 * CGFloat(i)
-        let imageview = SLImageView(frame: CGRect(x:15 + newX , y:((scrollheight / 2) - 100) ,width:167.5, height:167.5))
-        let theNewImage = setupNewImage(imageview: imageview, withImage: currentImage)
-        theNewImage.imageID = i
-        picsScrollView.addSubview(theNewImage)
-        UIView.animate(withDuration: 0.2) {
-          theNewImage.alpha = 1
-        }
+    addPhotoBtn.alpha = 0
+    addPhotoBtn2.alpha = 1
+    for i in 0..<array.count {
+      let currentImage = array[i]
+      let scrollheight = picsScrollView.frame.size.height
+      let newX =  260 * CGFloat(i)
+      let imageview = SLImageView(frame: CGRect(x:10 + newX , y:0 ,width:250, height:scrollheight))
+      let theNewImage = setupNewImage(imageview: imageview, withImage: currentImage)
+      theNewImage.imageID = i
+      picsScrollView.addSubview(theNewImage)
+      UIView.animate(withDuration: 0.2) {
+        theNewImage.alpha = 1
       }
-      if array.count > 2 {
-        scrollWidth.constant = CGFloat((375 * array.count) / 2)
-      } else {
-        scrollWidth.constant = 375
-      }
+    }
+    scrollWidth.constant = CGFloat((array.count * 260) + 15)
   }
   
   @objc private func saveDeleteAlert(_ sender: UILongPressGestureRecognizer) {
@@ -138,24 +158,25 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
       try? context.save()
       
       imageCache.removeObject(forKey: theObject.id as AnyObject)
-      UIView.animate(withDuration: 0.3, animations: {[weak self] in
+      UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {[weak self] in
         self?.view.layoutIfNeeded()
         thisImg.alpha = 0
         if let pictures = self?.picsScrollView.subviews {
           for pic in pictures {
             if let thisPic = pic as? SLImageView, thisPic.imageID > thisImg.imageID {
               thisPic.imageID -= 1
-              thisPic.center.x -= 182.5
+              thisPic.center.x -= 260
             }
           }
         }
       }) { [weak self]_ in
         thisImg.removeFromSuperview()
         self?.allImgs.remove(at: thisImg.imageID)
-        self?.scrollWidth.constant = CGFloat(((self?.picsScrollView.subviews.count)! - 2) * 187)
+        self?.scrollWidth.constant = CGFloat((((self?.picsScrollView.subviews.count)! - 2) * 260) + 15)
         if self?.picsScrollView.subviews.count == 2 {
-          UIView.animate(withDuration: 0.2, animations: {
+          UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
             self?.addPhotoBtn.alpha = 1
+            self?.addPhotoBtn2.alpha = 0
           })
         }
       }
@@ -218,7 +239,7 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
       let pic = Picture(context: context)
       pic.createNewPicture(data: imageData,appointment: appointment!)
       allImgs.insert(pic, at: 0)
-      let imageview = SLImageView(frame: CGRect(x:15 , y:((picsScrollView.frame.height / 2) - 100) ,width:167.5, height:167.5))
+      let imageview = SLImageView(frame: CGRect(x:10 , y:0 ,width:250, height:picsScrollView.frame.size.height))
       imageview.imageID = -1
       let theNewImage = setupNewImage(imageview:imageview, withImage: pic)
       imagePicker.dismiss(animated: true) {[weak self] in
@@ -243,6 +264,12 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     return imageview
   }
  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let dest = segue.destination as? AddOrEditAppointmentVC, let appoint = sender as? Appointment {
+      dest.delegate = self
+      dest.appointment = appoint
+    }
+  }
   
 }
 

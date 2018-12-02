@@ -44,15 +44,27 @@ class AddPatientVC: UIViewController, UITextFieldDelegate {
       present(alert,animated: true)
       return
     }
+    guard (phoneField.text?.count)! >= 10 else {
+      let alert = UIAlertController(title: "Invalid Number", message: "Please make sure you have the correct phone number.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
+      present(alert,animated: true)
+      return
+    }
     let gender = genderSwitch.isOn ? "Male" : "Female"
     let patient = Patient(context: context)
     patient.name = nameField.text
     patient.age = Int32(ageField.text!)!
     patient.gender = gender
-    patient.phone = Int32(phoneField.text!)!
+    patient.phone = phoneField.text!
     patient.address = addressField.text!
-    try? context.save()
-    navigationController?.popViewController(animated: true)
+    patient.date = Date()
+    patient.status = 1
+    do {
+      try context.save()
+      navigationController?.popViewController(animated: true)
+    } catch {
+      print(error)
+    }
   }
   
 }

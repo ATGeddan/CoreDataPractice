@@ -10,11 +10,11 @@ import UIKit
 
 class PatientCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
+  @IBOutlet weak var statusImage: UIImageView!
+  @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet weak var phoneLabel: UILabel!
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var ageLabel: UILabel!
  
     
 }
