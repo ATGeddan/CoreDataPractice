@@ -46,14 +46,19 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
   
   private func setupAppointmentData() {
     guard let theOperator = appointment?.theOperator,
-          let assistant = appointment?.assistant,
           let procedure = appointment?.procedure,
           let theDate = appointment?.date else {return}
     let dateString = DateFormatter.localizedString(from: theDate, dateStyle: .medium, timeStyle: .short)
     dateLabel.text = dateString
     operatorLabel.text = "Operator: \(theOperator)"
-    assistantLabel.text = "Assistant: \(assistant)"
     procedureView.text = procedure
+    
+    if let assistant = appointment?.assistant, assistant != "" {
+      assistantLabel.isHidden = false
+      assistantLabel.text = "Assistant: \(assistant)"
+    } else {
+      assistantLabel.isHidden = true
+    }
   }
   
   private func setupEditButton() {

@@ -85,6 +85,7 @@ class PatientsTableVC: CoreDataTableViewController, UISearchResultsUpdating {
     searchController.obscuresBackgroundDuringPresentation = false
     searchController.searchBar.placeholder = "Search Patients"
     searchController.searchBar.tintColor = .white
+    searchController.searchBar.barTintColor = .white
     navigationItem.hidesSearchBarWhenScrolling = true
     navigationItem.searchController = searchController
     definesPresentationContext = true
@@ -172,7 +173,7 @@ class PatientsTableVC: CoreDataTableViewController, UISearchResultsUpdating {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let destination = segue.destination as? AppointmentsTableViewController, let thePatient = sender as? Patient {
+    if let destination = segue.destination as? PatientVC, let thePatient = sender as? Patient {
       destination.patient = thePatient
     }
   }

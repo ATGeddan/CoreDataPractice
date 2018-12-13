@@ -1,0 +1,20 @@
+PODS:
+  - CVCalendar (1.6.1)
+  - IQKeyboardManagerSwift (6.2.0)
+
+DEPENDENCIES:
+  - CVCalendar (~> 1.6.1)
+  - IQKeyboardManagerSwift
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - CVCalendar
+    - IQKeyboardManagerSwift
+
+SPEC CHECKSUMS:
+  CVCalendar: 505c11b11a088b43f159806e791eba1c2540853b
+  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
+
+PODFILE CHECKSUM: 5688c61d3e120ff54b31f167d8c1bbe08c67eed9
+
+COCOAPODS: 1.5.0

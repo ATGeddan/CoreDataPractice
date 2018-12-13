@@ -23,6 +23,7 @@
 		26770C3C21A08C4100BA3039 /* AddPatientVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26770C3B21A08C4100BA3039 /* AddPatientVC.swift */; };
 		26946E6A219C7198008B5311 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26946E69219C7198008B5311 /* Appointment.swift */; };
 		26946E6C219C7B3C008B5311 /* AppointmentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26946E6B219C7B3C008B5311 /* AppointmentsTableViewController.swift */; };
+		26C33E7721BC14D500048041 /* Dentition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C33E7621BC14D500048041 /* Dentition.swift */; };
 		26C4FC0E21AB312D00E20B3F /* AppointmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C4FC0C21AB312D00E20B3F /* AppointmentCell.swift */; };
 		26C4FC0F21AB312D00E20B3F /* AppointmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C4FC0D21AB312D00E20B3F /* AppointmentCell.xib */; };
 		26C95B9921A301EC004D7395 /* CachingImagesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C95B9821A301EC004D7395 /* CachingImagesExtension.swift */; };
@@ -30,6 +31,9 @@
 		26D627A5219EE6E800B90741 /* AddOrEditAppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D627A4219EE6E800B90741 /* AddOrEditAppointmentVC.swift */; };
 		26D627A7219EEC9400B90741 /* SkyFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D627A6219EEC9400B90741 /* SkyFloatingTextField.swift */; };
 		26D64A3321B4450C00CF5E11 /* MedicalHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D64A3221B4450C00CF5E11 /* MedicalHistory.swift */; };
+		26D64A3521B447C000CF5E11 /* Appointments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26D64A3421B447C000CF5E11 /* Appointments.storyboard */; };
+		26D64A3721B4497000CF5E11 /* PatientVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D64A3621B4497000CF5E11 /* PatientVC.swift */; };
+		26D64A3921B44B9400CF5E11 /* MedicalHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D64A3821B44B9400CF5E11 /* MedicalHistoryVC.swift */; };
 		7F398486358E1600F69DEAF3 /* Pods_CoreDataPractice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44383FD66C71405ED66CF78A /* Pods_CoreDataPractice.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +57,7 @@
 		26770C3B21A08C4100BA3039 /* AddPatientVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPatientVC.swift; sourceTree = "<group>"; };
 		26946E69219C7198008B5311 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		26946E6B219C7B3C008B5311 /* AppointmentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsTableViewController.swift; sourceTree = "<group>"; };
+		26C33E7621BC14D500048041 /* Dentition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dentition.swift; sourceTree = "<group>"; };
 		26C4FC0C21AB312D00E20B3F /* AppointmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentCell.swift; sourceTree = "<group>"; };
 		26C4FC0D21AB312D00E20B3F /* AppointmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentCell.xib; sourceTree = "<group>"; };
 		26C95B9821A301EC004D7395 /* CachingImagesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingImagesExtension.swift; sourceTree = "<group>"; };
@@ -60,6 +65,9 @@
 		26D627A4219EE6E800B90741 /* AddOrEditAppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditAppointmentVC.swift; sourceTree = "<group>"; };
 		26D627A6219EEC9400B90741 /* SkyFloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyFloatingTextField.swift; sourceTree = "<group>"; };
 		26D64A3221B4450C00CF5E11 /* MedicalHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalHistory.swift; sourceTree = "<group>"; };
+		26D64A3421B447C000CF5E11 /* Appointments.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Appointments.storyboard; sourceTree = "<group>"; };
+		26D64A3621B4497000CF5E11 /* PatientVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientVC.swift; sourceTree = "<group>"; };
+		26D64A3821B44B9400CF5E11 /* MedicalHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalHistoryVC.swift; sourceTree = "<group>"; };
 		44383FD66C71405ED66CF78A /* Pods_CoreDataPractice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDataPractice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7DD7F3B2FCD22DCB83E7FE /* Pods-CoreDataPractice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDataPractice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDataPractice/Pods-CoreDataPractice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +142,7 @@
 			children = (
 				2623707B2198AD1700F2E7DF /* Patient.swift */,
 				26D64A3221B4450C00CF5E11 /* MedicalHistory.swift */,
+				26C33E7621BC14D500048041 /* Dentition.swift */,
 				26946E69219C7198008B5311 /* Appointment.swift */,
 				260A312821A1B0660035B747 /* Picture.swift */,
 				2623706D2198A51400F2E7DF /* CoreDataPractice.xcdatamodeld */,
@@ -145,6 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				262370862199DF7900F2E7DF /* PatientsTableVC.swift */,
+				26D64A3621B4497000CF5E11 /* PatientVC.swift */,
+				26D64A3821B44B9400CF5E11 /* MedicalHistoryVC.swift */,
 				26946E6B219C7B3C008B5311 /* AppointmentsTableViewController.swift */,
 				26D627A4219EE6E800B90741 /* AddOrEditAppointmentVC.swift */,
 				26770C3B21A08C4100BA3039 /* AddPatientVC.swift */,
@@ -168,6 +179,7 @@
 		26D627A3219EE65E00B90741 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				26D64A3421B447C000CF5E11 /* Appointments.storyboard */,
 				2623706A2198A51400F2E7DF /* Main.storyboard */,
 			);
 			path = Storyboards;
@@ -252,6 +264,7 @@
 			files = (
 				262370742198A51600F2E7DF /* LaunchScreen.storyboard in Resources */,
 				262370712198A51600F2E7DF /* Assets.xcassets in Resources */,
+				26D64A3521B447C000CF5E11 /* Appointments.storyboard in Resources */,
 				262370852199D4DF00F2E7DF /* PatientCell.xib in Resources */,
 				2623706C2198A51400F2E7DF /* Main.storyboard in Resources */,
 				26C4FC0F21AB312D00E20B3F /* AppointmentCell.xib in Resources */,
@@ -316,14 +329,17 @@
 				26D627A5219EE6E800B90741 /* AddOrEditAppointmentVC.swift in Sources */,
 				2623706F2198A51400F2E7DF /* CoreDataPractice.xcdatamodeld in Sources */,
 				262370672198A51400F2E7DF /* AppDelegate.swift in Sources */,
+				26D64A3721B4497000CF5E11 /* PatientVC.swift in Sources */,
 				262370872199DF7900F2E7DF /* PatientsTableVC.swift in Sources */,
 				26C95B9B21A468FF004D7395 /* HomeVC.swift in Sources */,
 				26D627A7219EEC9400B90741 /* SkyFloatingTextField.swift in Sources */,
 				260A312D21A1B7C40035B747 /* SLImageView.swift in Sources */,
 				26770C3C21A08C4100BA3039 /* AddPatientVC.swift in Sources */,
 				26946E6A219C7198008B5311 /* Appointment.swift in Sources */,
+				26C33E7721BC14D500048041 /* Dentition.swift in Sources */,
 				260A312B21A1B38E0035B747 /* AppointmentVC.swift in Sources */,
 				262370802199C5C000F2E7DF /* CoreDataTableViewController.swift in Sources */,
+				26D64A3921B44B9400CF5E11 /* MedicalHistoryVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
