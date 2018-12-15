@@ -11,9 +11,11 @@ import CoreData
 
 class PatientVC: UIViewController, UITextViewDelegate {
   
+  @IBOutlet weak var vipSwitch: UISwitch!
   @IBOutlet weak var chiefCompLbl: UILabel!
   @IBOutlet weak var chiefCompView: UITextView!
   var patient: Patient!
+  var editingVIPstate: Int16?
   @IBOutlet var dentitionButtons: [DentitionBtn]!
   
   override func viewDidLoad() {
@@ -21,6 +23,11 @@ class PatientVC: UIViewController, UITextViewDelegate {
     chiefCompView.delegate = self
     recieveDentition()
     recievePatientData()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(true)
+    checkVIPchange()
   }
   
   func textViewDidBeginEditing(_ textView: UITextView) {
@@ -44,6 +51,33 @@ class PatientVC: UIViewController, UITextViewDelegate {
         recievePatientData()
       } catch {
         
+      }
+    }
+  }
+  
+  @IBAction func vipSwitched(_ sender: UISwitch) {
+    switch sender.isOn {
+    case true :
+      editingVIPstate = 3
+    case false:
+      if patient.status != 3 {
+        editingVIPstate = patient.status
+      } else if patient.isStillNew() {
+        editingVIPstate = 1
+      } else {
+        editingVIPstate = 0
+      }
+    }
+  }
+  
+  private func checkVIPchange() {
+    if editingVIPstate != nil && editingVIPstate != patient.status {
+      patient.status = editingVIPstate!
+      guard let context = patient.managedObjectContext else {return}
+      do {
+        try context.save()
+      } catch {
+        print(error)
       }
     }
   }
@@ -78,13 +112,16 @@ class PatientVC: UIViewController, UITextViewDelegate {
   }
   
   private func recievePatientData() {
+    if patient.status == 3 {
+      vipSwitch.isOn = true
+    }
+    chiefCompView.layer.borderWidth = 1
+    chiefCompView.layer.borderColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+    chiefCompView.layer.cornerRadius = 10
     guard let theComplain = patient.chiefComplain, let compDate = patient.complainDate else {return}
     chiefCompView.text = theComplain
     let theDateString = DateFormatter.localizedString(from: compDate, dateStyle: .medium, timeStyle: .none)
     chiefCompLbl.text = "Chief Complain at \(theDateString)"
-    chiefCompView.layer.borderWidth = 1
-    chiefCompView.layer.borderColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
-    chiefCompView.layer.cornerRadius = 10
   }
   
   private func recieveDentition() {
