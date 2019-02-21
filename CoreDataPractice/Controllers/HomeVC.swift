@@ -12,7 +12,7 @@ import CVCalendar
 
 class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
   
-  @IBOutlet weak var monthLabel: UILabel! {
+  @IBOutlet weak var monthLabel: CLTypingLabel! {
     didSet {
       monthLabel.text = getMonthName(Date())
     }
@@ -52,9 +52,9 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
     calendarView.calendarDelegate = self
     calendarMenuView.menuViewDelegate = self
     calendarView.animatorDelegate = self
-    calendarView.appearance.dayLabelWeekdaySelectedBackgroundColor = #colorLiteral(red: 0.6851043456, green: 0.2821017894, blue: 0.2821017894, alpha: 1)
-    calendarView.appearance.dayLabelPresentWeekdaySelectedBackgroundColor = #colorLiteral(red: 0.6121311865, green: 0.006001286143, blue: 0.006001286143, alpha: 1)
-    calendarView.appearance.dayLabelPresentWeekdayTextColor = #colorLiteral(red: 0.6121311865, green: 0.006001286143, blue: 0.006001286143, alpha: 1)
+    calendarView.appearance.dayLabelWeekdaySelectedBackgroundColor = #colorLiteral(red: 0.7128025293, green: 0.5533084869, blue: 0.2515522838, alpha: 1)
+    calendarView.appearance.dayLabelPresentWeekdaySelectedBackgroundColor = #colorLiteral(red: 0.07090329379, green: 0.1490469873, blue: 0.1254850328, alpha: 1)
+    calendarView.appearance.dayLabelPresentWeekdayTextColor = #colorLiteral(red: 0.07090329379, green: 0.1490469873, blue: 0.1254850328, alpha: 1)
   }
   
   private func fetchAppointments() {
@@ -142,7 +142,7 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
   }
   
   func dotMarker(colorOnDayView dayView: DayView) -> [UIColor] {
-    return [#colorLiteral(red: 0.6121311865, green: 0.006001286143, blue: 0.006001286143, alpha: 1),#colorLiteral(red: 0.6121311865, green: 0.006001286143, blue: 0.006001286143, alpha: 1),#colorLiteral(red: 0.6121311865, green: 0.006001286143, blue: 0.006001286143, alpha: 1)]
+    return [#colorLiteral(red: 0.07090329379, green: 0.1490469873, blue: 0.1254850328, alpha: 1),#colorLiteral(red: 0.07090329379, green: 0.1490469873, blue: 0.1254850328, alpha: 1),#colorLiteral(red: 0.07090329379, green: 0.1490469873, blue: 0.1254850328, alpha: 1)]
   }
   
   func dotMarker(sizeOnDayView dayView: DayView) -> CGFloat {
@@ -150,7 +150,13 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
   }
   
   func presentedDateUpdated(_ date: CVDate) {
-    monthLabel.text = getMonthName(date.convertedDate()!)
+    let newMonth = getMonthName(date.convertedDate()!)
+    let oldMonth = monthLabel.fullText
+    if newMonth != oldMonth {
+      monthLabel.pauseTyping()
+      monthLabel.text = ""
+      monthLabel.text = newMonth
+    }
   }
   
   func didShowNextMonthView(_ date: Date) {

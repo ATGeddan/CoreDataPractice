@@ -124,11 +124,7 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     addPhotoBtn2.alpha = 1
     for i in 0..<array.count {
       let currentImage = array[i]
-      let scrollheight = picsScrollView.frame.size.height
-      let newX =  260 * CGFloat(i)
-      let imageview = SLImageView(frame: CGRect(x:10 + newX , y:0 ,width:250, height:scrollheight))
-      let theNewImage = setupNewImage(imageview: imageview, withImage: currentImage)
-      theNewImage.imageID = i
+      let theNewImage = setupNewImage(index: i, withImage: currentImage)
       picsScrollView.addSubview(theNewImage)
       UIView.animate(withDuration: 0.2) {
         theNewImage.alpha = 1
@@ -244,9 +240,8 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
       let pic = Picture(context: context)
       pic.createNewPicture(data: imageData,appointment: appointment!)
       allImgs.insert(pic, at: 0)
-      let imageview = SLImageView(frame: CGRect(x:10 , y:0 ,width:250, height:picsScrollView.frame.size.height))
-      imageview.imageID = -1
-      let theNewImage = setupNewImage(imageview:imageview, withImage: pic)
+      let theNewImage = setupNewImage(index:0, withImage: pic)
+      theNewImage.imageID = -1
       imagePicker.dismiss(animated: true) {[weak self] in
         try? context.save()
         self?.relayPictures(theNewImage)
@@ -255,10 +250,14 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     
   }
   
-  private func setupNewImage(imageview: SLImageView,withImage: Picture) -> SLImageView {
+  private func setupNewImage(index i: Int,withImage: Picture) -> SLImageView {
+    let newX =  260 * CGFloat(i)
+    let scrollheight = picsScrollView.frame.size.height
+    let imageview = SLImageView(frame: CGRect(x:10 + newX , y:0 ,width:250, height:scrollheight))
+    imageview.imageID = i
     imageview.image = UIImage(data: withImage.picData!)
     imageview.imageUsingCacheFromDatabase(key: withImage.id!)
-    imageview.contentMode = .scaleAspectFill
+    imageview.contentMode = .scaleToFill
     imageview.layer.borderWidth = 0.5
     imageview.layer.borderColor = UIColor(red: 140/255, green: 153/255, blue: 173/255, alpha: 0.5).cgColor
     imageview.layer.cornerRadius = 10
@@ -279,22 +278,6 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
 }
 
 
-
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-  return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-  return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-  return input.rawValue
-}
 
 
 

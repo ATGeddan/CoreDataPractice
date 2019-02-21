@@ -48,37 +48,29 @@ class AddOrEditAppointmentVC: UIViewController, UITextViewDelegate {
   
   func textViewDidBeginEditing(_ textView: UITextView) {
     if textView.text == "Procedure ..." {
-      textView.textColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
-      textView.layer.borderColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
+      textView.layer.borderColor = #colorLiteral(red: 0.7128025293, green: 0.5533084869, blue: 0.2515522838, alpha: 1)
       textView.text = ""
     }
   }
   
   func textViewDidEndEditing(_ textView: UITextView) {
     if textView.text.isEmpty {
-      textView.textColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
-      textView.layer.borderColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+      textView.layer.borderColor = #colorLiteral(red: 0.07090329379, green: 0.1490469873, blue: 0.1254850328, alpha: 1)
       textView.text = "Procedure ..."
     }
   }
   
   @objc private func saveAppointment() {
     guard dateField.text != "" else {
-      let alert = UIAlertController(title: "Date Missing", message: "Please set the date of the appointment.", preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
-      present(alert,animated: true)
+      presentBasicAlert(title: "Date Missing", message: "Please set the date of the appointment.")
       return
     }
     guard operatorField.text != "" else {
-      let alert = UIAlertController(title: "Operator Missing", message: "Please set the operator of the procedure.", preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
-      present(alert,animated: true)
+      presentBasicAlert(title: "Operator Missing", message: "Please set the operator of the procedure.")
       return
     }
     guard procedureView.text != "Procedure ..." else {
-      let alert = UIAlertController(title: "Procedure Missing", message: "Please clarify the procedure of the appointment.", preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
-      present(alert,animated: true)
+      presentBasicAlert(title: "Procedure Missing", message: "Please clarify the procedure of the appointment.")
       return
     }
     var context: NSManagedObjectContext!

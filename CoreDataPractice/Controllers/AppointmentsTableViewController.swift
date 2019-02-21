@@ -18,7 +18,7 @@ class AppointmentsTableViewController: CoreDataTableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.register(UINib(nibName: "AppointmentCell", bundle: nil), forCellReuseIdentifier: "AppointmentCell")
+    tableView.register(UINib(nibName: "AppointmentCell", bundle: nil), forCellReuseIdentifier: AppointmentCell.identifier)
     if dateFromCalendar == nil {
       let rightButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(goToAdd))
       navigationItem.rightBarButtonItem = rightButton
@@ -28,20 +28,25 @@ class AppointmentsTableViewController: CoreDataTableViewController {
   
   override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     super.controllerDidChangeContent(controller)
-    adjustLastVisitDate()
+    adjustLastAndNextVisitDates()
   }
   
-  private func adjustLastVisitDate() {
+  private func adjustLastAndNextVisitDates() {
     guard let appointments = fetchedResultsController?.fetchedObjects else {return}
     let pastAppoints = appointments.filter({$0.date! < Date()})
+    let futureAppoints = appointments.filter({$0.date! > Date()})
     if patient != nil, let context = patient?.managedObjectContext {
       if pastAppoints.count > 0 {
         patient?.lastVisitDate = pastAppoints[0].date
-        try? context.save()
       } else {
         patient?.lastVisitDate = nil
-        try? context.save()
       }
+      if futureAppoints.count > 0 {
+        patient?.nextVisitDate = futureAppoints.last?.date
+      } else {
+        patient?.nextVisitDate = nil
+      }
+      try? context.save()
     }
   }
   
@@ -72,7 +77,7 @@ class AppointmentsTableViewController: CoreDataTableViewController {
     fetchedResultsController?.delegate = self
     do {
       try fetchedResultsController?.performFetch()
-      adjustLastVisitDate()
+      adjustLastAndNextVisitDates()
       tableView.reloadData()
     } catch {
       print(error)

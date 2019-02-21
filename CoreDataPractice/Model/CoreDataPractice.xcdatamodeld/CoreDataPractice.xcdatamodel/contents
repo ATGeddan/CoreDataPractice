@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18D109" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Appointment" representedClassName=".Appointment" syncable="YES" codeGenerationType="category">
         <attribute name="assistant" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comparisonDate" optional="YES" attributeType="String" syncable="YES"/>
@@ -47,6 +47,8 @@
     </entity>
     <entity name="MedicalHistory" representedClassName=".MedicalHistory" syncable="YES" codeGenerationType="category">
         <attribute name="allergy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chiefComplain" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="complainDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="diabetes" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lactation" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="liver" optional="YES" attributeType="String" syncable="YES"/>
@@ -58,13 +60,13 @@
     </entity>
     <entity name="Patient" representedClassName=".Patient" syncable="YES" codeGenerationType="category">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="chiefComplain" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="complainDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="birth" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="lastVisitDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nextVisitDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="appointments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Appointment" inverseName="thePatient" inverseEntity="Appointment" syncable="YES"/>
@@ -82,8 +84,8 @@
     <elements>
         <element name="Appointment" positionX="158.54296875" positionY="-41.75390625" width="128" height="163"/>
         <element name="Dentition" positionX="-387.23046875" positionY="253.15625" width="128" height="538"/>
-        <element name="MedicalHistory" positionX="-223.375" positionY="252.15625" width="128" height="178"/>
-        <element name="Patient" positionX="-220.8125" positionY="-26.41015625" width="128" height="253"/>
+        <element name="MedicalHistory" positionX="-223.375" positionY="252.15625" width="128" height="208"/>
+        <element name="Patient" positionX="-220.8125" positionY="-26.41015625" width="128" height="255"/>
         <element name="Picture" positionX="-30.62890625" positionY="202.3125" width="128" height="118"/>
     </elements>
 </model>

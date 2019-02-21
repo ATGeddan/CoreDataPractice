@@ -21,11 +21,11 @@ class PatientsTableVC: CoreDataTableViewController, UISearchResultsUpdating {
   var isFiltering = false { didSet { tableView.reloadData() } }
   
   override func viewDidLoad() {
-    tableView.register(UINib(nibName: "PatientCell", bundle: nil), forCellReuseIdentifier: "PatientCell")
+    tableView.register(UINib(nibName: "PatientCell", bundle: nil), forCellReuseIdentifier: PatientCell.identifier)
     let rightAddButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPatient))
     let rightSearchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchClicked))
     navigationItem.rightBarButtonItems = [rightAddButton,rightSearchButton]
-    
+    tableView.contentInset = UIEdgeInsets(top: 5,left: 0,bottom: 5,right: 0)
     setupSearchController()
     fetchPatients()
   }
@@ -35,7 +35,6 @@ class PatientsTableVC: CoreDataTableViewController, UISearchResultsUpdating {
     searchController.isActive = false
   }
 
-  
   @objc private func searchClicked() {
     searchController.isActive = true
   }
@@ -83,9 +82,10 @@ class PatientsTableVC: CoreDataTableViewController, UISearchResultsUpdating {
   private func setupSearchController() {
     searchController.searchResultsUpdater = self
     searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchBar.searchBarStyle = .minimal
+    searchController.searchBar.barStyle = .blackOpaque
     searchController.searchBar.placeholder = "Search Patients"
-    searchController.searchBar.tintColor = .white
-    searchController.searchBar.barTintColor = .white
+    searchController.searchBar.tintColor = #colorLiteral(red: 0.07090329379, green: 0.1490469873, blue: 0.1254850328, alpha: 1)
     navigationItem.hidesSearchBarWhenScrolling = true
     navigationItem.searchController = searchController
     definesPresentationContext = true
@@ -94,53 +94,9 @@ class PatientsTableVC: CoreDataTableViewController, UISearchResultsUpdating {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
     let cell = tableView.dequeueReusableCell(withIdentifier: "PatientCell", for: indexPath) as? PatientCell
-    if isFiltering {
-      let patient = filteredPatients[indexPath.row]
-      if patient.lastVisitDate != nil {
-        let dateTxt = DateFormatter.localizedString(from: patient.lastVisitDate!, dateStyle: .medium, timeStyle: .none)
-        cell?.dateLabel.text = "Last Visit : \(dateTxt)"
-      } else {
-        cell?.dateLabel.text = "Last Visit : -- -- ----"
-      }
-      cell?.nameLabel.text = patient.name!
-      cell?.ageLabel.text = String(patient.age)
-      cell?.phoneLabel.text = patient.phone!
-      switch patient.status {
-      case 0:
-        cell?.statusImage.image = UIImage(named: "Logo")
-      case 1:
-        cell?.statusImage.image = UIImage(named: "New")
-      case 2:
-        cell?.statusImage.image = UIImage(named: "High risk")
-      case 3:
-        cell?.statusImage.image = UIImage(named: "VIP")
-      default:
-        break
-      }
-    } else {
-      if let patient = fetchedResultsController?.object(at: indexPath) {
-        if patient.lastVisitDate != nil {
-          let dateTxt = DateFormatter.localizedString(from: patient.lastVisitDate!, dateStyle: .medium, timeStyle: .none)
-          cell?.dateLabel.text = "Last Visit : \(dateTxt)"
-        } else {
-          cell?.dateLabel.text = "Last Visit : -- -- ----"
-        }
-        cell?.nameLabel.text = patient.name!
-        cell?.ageLabel.text = String(patient.age)
-        cell?.phoneLabel.text = patient.phone!
-        switch patient.status {
-        case 0:
-          cell?.statusImage.image = UIImage(named: "Logo")
-        case 1:
-          cell?.statusImage.image = UIImage(named: "New")
-        case 2:
-          cell?.statusImage.image = UIImage(named: "High risk")
-        case 3:
-          cell?.statusImage.image = UIImage(named: "VIP")
-        default:
-          break
-        }
-      }
+    if let thePatient = fetchedResultsController?.object(at: indexPath) {
+      let patient = !isFiltering ? thePatient : filteredPatients[indexPath.row]
+      cell?.setupCell(patient: patient)
     }
     return cell!
   }
@@ -169,7 +125,7 @@ class PatientsTableVC: CoreDataTableViewController, UISearchResultsUpdating {
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 165
+    return 93
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

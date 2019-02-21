@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tfM-zZ-NDF">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +15,7 @@
             <objects>
                 <tableViewController id="tfM-zZ-NDF" customClass="AppointmentsTableViewController" customModule="CoreDataPractice" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lcl-B5-q3S">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
@@ -36,28 +40,28 @@
             <objects>
                 <viewController id="3QV-Yc-Mft" customClass="AppointmentVC" customModule="CoreDataPractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="ADJ-9Z-8as">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="khe-n0-1Ki">
-                                <rect key="frame" x="30" y="20" width="315" height="104.5"/>
+                                <rect key="frame" x="30" y="40" width="315" height="104.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhm-j7-hDN">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="23.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                                        <color key="textColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Operator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZq-cy-dLJ">
                                         <rect key="frame" x="0.0" y="40.5" width="315" height="23.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                                        <color key="textColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assistant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKl-1q-CSK">
                                         <rect key="frame" x="0.0" y="81" width="315" height="23.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                                        <color key="textColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -66,23 +70,23 @@
                                 </constraints>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Procedure ..." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Se6-wS-Q5J">
-                                <rect key="frame" x="30" y="134.5" width="315" height="115"/>
+                                <rect key="frame" x="30" y="154.5" width="315" height="115"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="115" id="LQU-kX-N6K"/>
                                 </constraints>
-                                <color key="textColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
                             </textView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUy-BF-ec6">
-                                <rect key="frame" x="0.0" y="294" width="375" height="309"/>
+                                <rect key="frame" x="0.0" y="314" width="375" height="348"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Kj-YA-6Ig">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="309"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="296"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="309" id="GjL-wh-Cgc"/>
+                                            <constraint firstAttribute="height" constant="296" id="GjL-wh-Cgc"/>
                                             <constraint firstAttribute="width" constant="375" id="nZi-ys-JHb"/>
                                         </constraints>
                                     </view>
@@ -107,10 +111,9 @@
                                     <constraint firstItem="7Kj-YA-6Ig" firstAttribute="top" secondItem="gUy-BF-ec6" secondAttribute="top" id="j70-iy-KGd"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mii-me-IhV">
-                                <rect key="frame" x="321" y="259" width="30" height="30"/>
-                                <color key="backgroundColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
-                                <state key="normal" title="Add">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mii-me-IhV">
+                                <rect key="frame" x="310" y="278" width="52" height="52"/>
+                                <state key="normal" image="addimage">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -118,7 +121,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.95643120999999998" green="0.92176747319999996" blue="0.8157092333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="khe-n0-1Ki" firstAttribute="top" secondItem="EmB-JF-adI" secondAttribute="top" constant="20" id="4Mj-B4-cVr"/>
                             <constraint firstItem="khe-n0-1Ki" firstAttribute="leading" secondItem="EmB-JF-adI" secondAttribute="leading" constant="30" id="I0K-P9-za8"/>
@@ -126,8 +129,8 @@
                             <constraint firstItem="Mii-me-IhV" firstAttribute="centerX" secondItem="EmB-JF-adI" secondAttribute="centerX" constant="148.5" id="Qhl-l5-Xr4"/>
                             <constraint firstItem="gUy-BF-ec6" firstAttribute="leading" secondItem="EmB-JF-adI" secondAttribute="leading" id="VRH-5R-1ul"/>
                             <constraint firstItem="Se6-wS-Q5J" firstAttribute="top" secondItem="khe-n0-1Ki" secondAttribute="bottom" constant="10" id="YOx-ir-Son"/>
-                            <constraint firstItem="Mii-me-IhV" firstAttribute="centerY" secondItem="EmB-JF-adI" secondAttribute="centerY" constant="-27.5" id="Zp2-1e-bvV"/>
-                            <constraint firstItem="gUy-BF-ec6" firstAttribute="bottom" secondItem="EmB-JF-adI" secondAttribute="bottom" id="bpq-ld-Zjd"/>
+                            <constraint firstItem="Mii-me-IhV" firstAttribute="centerY" secondItem="EmB-JF-adI" secondAttribute="centerY" constant="-39.5" id="Zp2-1e-bvV"/>
+                            <constraint firstItem="gUy-BF-ec6" firstAttribute="bottom" secondItem="EmB-JF-adI" secondAttribute="bottom" constant="-5" id="bpq-ld-Zjd"/>
                             <constraint firstItem="EmB-JF-adI" firstAttribute="trailing" secondItem="khe-n0-1Ki" secondAttribute="trailing" constant="30" id="dEw-TA-dn0"/>
                             <constraint firstItem="gUy-BF-ec6" firstAttribute="top" secondItem="Se6-wS-Q5J" secondAttribute="bottom" constant="44.5" id="e25-Yc-xfe"/>
                             <constraint firstItem="EmB-JF-adI" firstAttribute="trailing" secondItem="gUy-BF-ec6" secondAttribute="trailing" id="t4A-3j-clZ"/>
@@ -156,11 +159,11 @@
             <objects>
                 <viewController id="Byv-c4-eAy" customClass="AddOrEditAppointmentVC" customModule="CoreDataPractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1DC-YN-oHF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="yBE-2i-sY6">
-                                <rect key="frame" x="27" y="27" width="240" height="205.5"/>
+                                <rect key="frame" x="67" y="48" width="240" height="205.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="cMP-CG-6la" customClass="SkyFloatingLabelTextField" customModule="CoreDataPractice" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
@@ -172,22 +175,22 @@
                                                 <color key="value" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="0.69635595029999997" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.83822470900000001" green="0.67882591489999999" blue="0.37694033980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Date"/>
                                             <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Date"/>
                                             <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.71280252929999999" green="0.55330848690000001" blue="0.2515522838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Date .."/>
                                             <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="0.79979130990000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                <color key="value" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                                <color key="value" red="0.71280252929999999" green="0.55330848690000001" blue="0.2515522838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="lineErrorColor">
                                                 <color key="value" name="systemRedColor" catalog="System" colorSpace="catalog"/>
@@ -207,23 +210,23 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="0.69635595029999997" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.83822470900000001" green="0.67882591489999999" blue="0.37694033980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Operator .."/>
                                             <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="0.79979130990000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                 <color key="value" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                <color key="value" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                                <color key="value" red="0.71280252929999999" green="0.55330848690000001" blue="0.2515522838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.71280252929999999" green="0.55330848690000001" blue="0.2515522838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Operator"/>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Operator"/>
@@ -236,23 +239,23 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="0.69635595029999997" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.83822470900000001" green="0.67882591489999999" blue="0.37694033980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Assistant .."/>
                                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                 <color key="value" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="0.79979130990000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                <color key="value" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                                <color key="value" red="0.71280252929999999" green="0.55330848690000001" blue="0.2515522838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
-                                                <color key="value" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.71280252929999999" green="0.55330848690000001" blue="0.2515522838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Assistant"/>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Assistant"/>
@@ -264,19 +267,25 @@
                                     <constraint firstAttribute="height" constant="205.5" id="Dyl-yw-3oM"/>
                                 </constraints>
                             </stackView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Procedure ..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="da4-Qu-b4k">
-                                <rect key="frame" x="27" y="341" width="317" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Procedure ..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="da4-Qu-b4k">
+                                <rect key="frame" x="29" y="269.5" width="317" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.71280252929999999" green="0.55330848690000001" blue="0.2515522838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="FIK-KE-fyc"/>
+                                    <constraint firstAttribute="width" constant="317" id="VsE-Zf-Wdk"/>
+                                </constraints>
+                                <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.95643120999999998" green="0.92176747319999996" blue="0.8157092333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="yBE-2i-sY6" firstAttribute="leading" secondItem="f39-kO-POb" secondAttribute="leading" constant="27" id="11q-57-evh"/>
-                            <constraint firstItem="yBE-2i-sY6" firstAttribute="top" secondItem="f39-kO-POb" secondAttribute="top" constant="27" id="Q3t-y1-557"/>
+                            <constraint firstItem="yBE-2i-sY6" firstAttribute="leading" secondItem="f39-kO-POb" secondAttribute="leading" constant="67" id="11q-57-evh"/>
+                            <constraint firstItem="da4-Qu-b4k" firstAttribute="centerX" secondItem="1DC-YN-oHF" secondAttribute="centerX" id="OAj-tD-zUB"/>
+                            <constraint firstItem="yBE-2i-sY6" firstAttribute="top" secondItem="f39-kO-POb" secondAttribute="top" constant="28" id="Q3t-y1-557"/>
+                            <constraint firstItem="da4-Qu-b4k" firstAttribute="centerY" secondItem="1DC-YN-oHF" secondAttribute="centerY" id="t6P-uF-mIx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="f39-kO-POb"/>
                     </view>
@@ -293,6 +302,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="addimage" width="52" height="52"/>
         <image name="button-black-instagram" width="207" height="172"/>
     </resources>
     <inferredMetricsTieBreakers>

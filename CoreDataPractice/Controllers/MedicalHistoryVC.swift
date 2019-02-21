@@ -8,8 +8,10 @@
 
 import UIKit
 
-class MedicalHistoryVC: UIViewController, UITextFieldDelegate {
+class MedicalHistoryVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
 
+  @IBOutlet weak var chiefCompView: UITextView!
+  @IBOutlet weak var chiefCompLbl: UILabel!
   @IBOutlet weak var femaleView: UIView!
   @IBOutlet weak var surgeryField: SkyFloatingLabelTextField!
   @IBOutlet weak var liverField: SkyFloatingLabelTextField!
@@ -21,6 +23,7 @@ class MedicalHistoryVC: UIViewController, UITextFieldDelegate {
   @IBOutlet var notButtons: [UIButton]!
   
   var patient: Patient!
+  var saving = false
   var startedEditing = false {
     didSet {
       let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveHistory))
@@ -30,14 +33,32 @@ class MedicalHistoryVC: UIViewController, UITextFieldDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    surgeryField.delegate = self
-    allergyField.delegate = self
-    liverField.delegate = self
+    setupComplainViewAndDelegates()
     setupUI()
+    setupUndoManager()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    view.endEditing(animated)
+    if !saving {
+      let context = patient.history?.managedObjectContext
+      context?.undoManager?.endUndoGrouping()
+      context?.undoManager?.undoNestedGroup()
+    }
+    super.viewWillDisappear(animated)
+  }
+  
+  private func setupUndoManager() {
+    let context = patient.history?.managedObjectContext
+    if context?.undoManager == nil {
+      context?.undoManager = UndoManager()
+    }
+    context?.undoManager?.removeAllActions()
+    context?.undoManager?.beginUndoGrouping()
   }
 
   @objc private func saveHistory() {
-    view.endEditing(true)
+    saving = true
     do {
       try patient.history?.managedObjectContext?.save()
       navigationController?.popViewController(animated: true)
@@ -46,8 +67,60 @@ class MedicalHistoryVC: UIViewController, UITextFieldDelegate {
     }
   }
   
+  func textViewDidBeginEditing(_ textView: UITextView) {
+    if textView.text == "Chief Complain ..." {
+      textView.layer.borderColor = #colorLiteral(red: 0.7128025293, green: 0.5533084869, blue: 0.2515522838, alpha: 1)
+      textView.text = ""
+    }
+  }
+  
+  func textViewDidEndEditing(_ textView: UITextView) {
+    if textView.text.isEmpty {
+      textView.layer.borderColor = #colorLiteral(red: 0.07090329379, green: 0.1490469873, blue: 0.1254850328, alpha: 1)
+      textView.text = "Chief Complain ..."
+    } else {
+      updateOrCreateChiefComplain()
+    }
+  }
+  
+  private func updateOrCreateChiefComplain() {
+    if !startedEditing {
+      startedEditing = true
+    }
+    if patient.history == nil, let context = patient.managedObjectContext {
+      let history = MedicalHistory(context: context)
+      history.thePatinet = patient
+      do {
+        try context.save()
+        updateOrCreateChiefComplain()
+      } catch {
+        print(error)
+      }
+    } else {
+      patient.history?.chiefComplain = chiefCompView.text!
+      patient.history?.complainDate = Date()
+      let theDateString = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .none)
+      chiefCompLbl.text = "Chief Complain at \(theDateString) :"
+    }
+  }
+  
+  private func setupComplainViewAndDelegates() {
+    surgeryField.delegate = self
+    allergyField.delegate = self
+    liverField.delegate = self
+    chiefCompView.delegate = self
+    chiefCompView.layer.borderWidth = 1
+    chiefCompView.layer.borderColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+    chiefCompView.layer.cornerRadius = 10
+  }
+  
   private func recieveHistory() {
     if let theHistory = patient.history {
+      if let theComplain = patient.history?.chiefComplain, let compDate = patient.history?.complainDate {
+        chiefCompView.text = theComplain
+        let theDateString = DateFormatter.localizedString(from: compDate, dateStyle: .medium, timeStyle: .none)
+        chiefCompLbl.text = "Chief Complain at \(theDateString) :"
+      }
       if theHistory.allergy != nil {
         updateButtonUI(tag: 0, isFree: false)
         allergyField.text = theHistory.allergy
