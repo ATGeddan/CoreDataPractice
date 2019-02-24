@@ -34,6 +34,12 @@ extension UIViewController {
   
 }
 
+func calculateAge(birthDate: Date) -> Int {
+  let calendar = Calendar.current
+  let ageComponents = calendar.dateComponents([.year], from: birthDate, to: Date())
+  return ageComponents.year!
+}
+
 enum PresentationDirection: String {
   case bottom
   case top

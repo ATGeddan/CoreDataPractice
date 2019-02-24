@@ -40,6 +40,7 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(true)
     toggleShowAppointsButton(hasAppoints: false)
+    
   }
   
   override func viewDidLayoutSubviews() {

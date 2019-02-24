@@ -10,8 +10,9 @@ import UIKit
 import CoreData
 import Photos
 
-class PatientVC: UIViewController {
+class PatientVC: UIViewController, EditingPatientDelegate {
   
+  @IBOutlet weak var statusBtn: UIButton!
   @IBOutlet weak var imageFrame: UIImageView!
   @IBOutlet weak var nextVisitLabel: UILabel!
   @IBOutlet weak var lastVisitLabel: UILabel!
@@ -25,28 +26,22 @@ class PatientVC: UIViewController {
   @IBOutlet fileprivate weak var dentitionArrow: UIButton!
   @IBOutlet fileprivate weak var dentitionConstraint: NSLayoutConstraint!
   @IBOutlet fileprivate weak var infoTopConstraint: NSLayoutConstraint!
-  @IBOutlet fileprivate weak var vipSwitch: UISwitch!
-
+  @IBOutlet weak var guideHeight: NSLayoutConstraint!
+  
   @IBOutlet fileprivate var dentitionButtons: [DentitionBtn]!
   @IBOutlet fileprivate var actionButtons: [UIButton]!
+  @IBOutlet weak var decidiousStack: UIStackView!
+  @IBOutlet fileprivate var permenantStacks: [UIStackView]!
   
   lazy fileprivate var imagePicker = UIImagePickerController()
   var patient: Patient!
-  fileprivate var editingVIPstate: Int16?
-  fileprivate var uiStatus: uiOptions = .neither {
-    didSet {
-      switch uiStatus {
-      case .dentition:
-        dentitionArrow.rotate90()
-        infoArrow.rotate0()
-      case .info:
-        infoArrow.rotate90()
-        dentitionArrow.rotate0()
-      case .neither:
-        infoArrow.rotate0()
-        dentitionArrow.rotate0()
-      }
-    }
+  fileprivate var uiStatus: uiOptions = .neither
+
+  fileprivate var dentitionType: dentTypes?
+  fileprivate enum dentTypes {
+    case decidious
+    case permenant
+    case mixed
   }
   
   fileprivate enum uiOptions {
@@ -57,34 +52,19 @@ class PatientVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupButtonsLayer()
+    setupButtonsLayerAndEditButton()
     recieveDentition()
-    recieveVIPstate()
-    recievePatientInfo()
+    recieveState()
+    recievePatientInfo(patient)
     setupPhotoDeletion()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(true)
-    checkVIPchange()
+    checkStateChange()
   }
   
-  @IBAction func vipSwitched(_ sender: UISwitch) {
-    switch sender.isOn {
-    case true :
-      editingVIPstate = 3
-    case false:
-      if patient.status != 3 {
-        editingVIPstate = patient.status
-      } else if patient.isStillNew {
-        editingVIPstate = 1
-      } else {
-        editingVIPstate = 0
-      }
-    }
-  }
-  
-  private func recievePatientInfo() {
+  private func recievePatientInfo(_ patient: Patient) {
     if let photoData = patient.imageData {
       patientPhoto.image = UIImage(data: photoData)
     } else {
@@ -97,6 +77,17 @@ class PatientVC: UIViewController {
     genderLabel.text = patient.gender
     lastVisitLabel.text = patient.lastVisitDate != nil ? formatDate(patient.lastVisitDate!) : "--/--/----"
     nextVisitLabel.text = patient.nextVisitDate != nil ? formatDate(patient.nextVisitDate!) : "--/--/----"
+    switch calculateAge(birthDate: patient.birth!) {
+    case 0...6:
+      dentitionType = .decidious
+    case 7...13:
+      dentitionType = .mixed
+    case 14...:
+      dentitionType = .permenant
+    default:
+      break
+    }
+    setupProperDentition()
   }
   
   private func setupPhotoDeletion() {
@@ -129,17 +120,22 @@ class PatientVC: UIViewController {
     return dateString
   }
   
-  private func setupButtonsLayer() {
+  private func setupButtonsLayerAndEditButton() {
     for button in actionButtons {
       button.layer.cornerRadius = 5
     }
     patientPhoto.layer.cornerRadius = 24
+    let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(goToEdit))
+    navigationItem.rightBarButtonItem = edit
   }
   
-  private func checkVIPchange() {
-    if editingVIPstate != nil && editingVIPstate != patient.status {
-      patient.status = editingVIPstate!
-      guard let context = patient.managedObjectContext else {return}
+  @objc private func goToEdit() {
+    performSegue(withIdentifier: "editPatient", sender: patient)
+  }
+  
+  private func checkStateChange() {
+    guard let context = patient.managedObjectContext else {return}
+    if context.hasChanges {
       do {
         try context.save()
       } catch {
@@ -150,10 +146,10 @@ class PatientVC: UIViewController {
   
   @IBAction func dentitionBtnPressed(_ sender: DentitionBtn) {
     view.endEditing(true)
-    if sender.status < 8 {
-      sender.status += 1
-    } else {
-      sender.status = 0
+    if sender.type == .permenant {
+      sender.status < 8 ? (sender.status += 1) : (sender.status = 0)
+    } else if sender.type == .decidious {
+      sender.status < 7 ? (sender.status += 1) : (sender.status = 0)
     }
     sender.updateButtonUI(sender.status)
     editOrCreateDentition(sender)
@@ -177,10 +173,22 @@ class PatientVC: UIViewController {
     }
   }
   
-  private func recieveVIPstate() {
-    if patient.status == 3 {
-      vipSwitch.isOn = true
+  private func recieveState() {
+    switch patient.status {
+    case 1:
+      statusBtn.setImage(patient.isStillNew ? #imageLiteral(resourceName: "New") : #imageLiteral(resourceName: "Logo"), for: .normal)
+    case 2:
+      statusBtn.setImage(#imageLiteral(resourceName: "High risk"), for: .normal)
+    case 3:
+      statusBtn.setImage(#imageLiteral(resourceName: "VIP"), for: .normal)
+    default:
+      break
     }
+  }
+  
+  @IBAction func statusButtonPressed(_ sender: UIButton) {
+    patient.status < 3 ? (patient.status += 1) : (patient.status = 1)
+    recieveState()
   }
   
   private func recieveDentition() {
@@ -198,12 +206,20 @@ class PatientVC: UIViewController {
     }
   }
   
+  func didEditPatient(_ patient: Patient) {
+    recievePatientInfo(patient)
+  }
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let destination = segue.destination as? AppointmentsTableViewController {
       destination.patient = patient
     }
     if let destination = segue.destination as? MedicalHistoryVC {
       destination.patient = patient
+    }
+    if let dest = segue.destination as? AddPatientVC, let patient = sender as? Patient {
+      dest.patientToEdit = patient
+      dest.delegate = self
     }
   }
 }
@@ -224,8 +240,33 @@ extension PatientVC {
     toggleViews(oldStatus: old)
   }
   
-  // info 0 show -300 hide
-  // dentition 0 show 250 hide
+  func setupProperDentition() {
+    for stack in permenantStacks {
+      stack.layer.zPosition = 1
+    }
+    
+    switch dentitionType {
+    case .decidious?:
+      guideHeight.constant = 160
+      for stack in permenantStacks {
+        stack.isHidden = true
+        stack.isUserInteractionEnabled = false
+      }
+      decidiousStack.layer.zPosition = 2
+    case .permenant?:
+      guideHeight.constant = 160
+      decidiousStack.isHidden = true
+      decidiousStack.isUserInteractionEnabled = false
+    case .mixed?:
+      guideHeight.constant = 90
+    default:
+      break
+    }
+  }
+  
+  // info 0 show -326 hide
+  // dentition 280 show 0 hide
+  // guide height 90 mixed 160 Not
   
   private func toggleViews(oldStatus: uiOptions) {
     let newStatus = uiStatus
@@ -242,7 +283,6 @@ extension PatientVC {
   }
   
   private func switchViews() {
-    
     if infoTopConstraint.constant == 0 { // Info view is showing
       toggleInfo {[weak self] in
         self?.toggleDentition {}
@@ -255,8 +295,10 @@ extension PatientVC {
   }
   
   private func toggleDentition(completion: @escaping ()->Void) {
+    let constraint = dentitionConstraint.constant
     UIView.animate(withDuration: 0.3, animations: {[weak self] in
-      self?.dentitionConstraint.constant = self?.dentitionConstraint.constant == 250 ? 0 : 250
+      self?.dentitionConstraint.constant = constraint == 0 ? 280 : 0
+      self?.dentitionArrow.transform = CGAffineTransform(rotationAngle: constraint == 0 ? 90 * (.pi / 180) : 0)
       self?.view.layoutIfNeeded()
     }, completion: { _ in
       completion()
@@ -264,8 +306,10 @@ extension PatientVC {
   }
   
   private func toggleInfo(completion: @escaping ()->Void) {
+    let constraint = infoTopConstraint.constant
     UIView.animate(withDuration: 0.3, animations: {[weak self] in
-      self?.infoTopConstraint.constant = self?.infoTopConstraint.constant == 0 ? -300 : 0
+      self?.infoTopConstraint.constant = constraint == -326 ? 0 : -326
+      self?.infoArrow.transform = CGAffineTransform(rotationAngle: constraint == -326 ? 90 * (.pi / 180) : 0)
       self?.view.layoutIfNeeded()
     }, completion: { _ in
       completion()

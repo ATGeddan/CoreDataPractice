@@ -16,6 +16,7 @@ protocol DidEditAppointmentDelegate {
 
 class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DidEditAppointmentDelegate {
   
+  @IBOutlet weak var patientNameLabel: UILabel!
   @IBOutlet weak var addPhotoBtn2: UIButton!
   @IBOutlet weak var addPhotoBtn: UIButton!
   @IBOutlet weak var picsScrollView: UIScrollView!
@@ -47,11 +48,13 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
   private func setupAppointmentData() {
     guard let theOperator = appointment?.theOperator,
           let procedure = appointment?.procedure,
-          let theDate = appointment?.date else {return}
+          let theDate = appointment?.date,
+          let name = appointment?.thePatient?.name else {return}
     let dateString = DateFormatter.localizedString(from: theDate, dateStyle: .medium, timeStyle: .short)
     dateLabel.text = dateString
     operatorLabel.text = "Operator: \(theOperator)"
-    procedureView.text = procedure
+    procedureView.text = "Procedure : \(procedure)"
+    patientNameLabel.text = name
     
     if let assistant = appointment?.assistant, assistant != "" {
       assistantLabel.isHidden = false

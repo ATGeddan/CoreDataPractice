@@ -23,6 +23,7 @@ class AppointmentsTableViewController: CoreDataTableViewController {
       let rightButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(goToAdd))
       navigationItem.rightBarButtonItem = rightButton
     }
+    tableView.contentInset = UIEdgeInsets(top: 5,left: 0,bottom: 5,right: 0)
     fetchAppointments()
   }
   
@@ -87,8 +88,7 @@ class AppointmentsTableViewController: CoreDataTableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "AppointmentCell", for: indexPath) as? AppointmentCell
     if let appoint = fetchedResultsController?.object(at: indexPath) {
-      cell?.textLabel?.text = "Operator : \(appoint.theOperator!) ---- Assistant \(appoint.assistant!)"
-      cell?.detailTextLabel?.text = DateFormatter.localizedString(from: appoint.date ?? Date(), dateStyle: .short, timeStyle: .short)
+      cell?.setupCell(appointment: appoint, fromCalendar: (dateFromCalendar != nil))
     }
     return cell!
   }
@@ -97,7 +97,7 @@ class AppointmentsTableViewController: CoreDataTableViewController {
     if let appoints = fetchedResultsController?.fetchedObjects {
       return appoints.count
     }
-    return 1
+    return 0
   }
 
   

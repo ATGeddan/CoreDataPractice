@@ -156,7 +156,7 @@ class MedicalHistoryVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
     allergyField.alpha = 0
     surgeryField.alpha = 0
     liverField.alpha = 0
-    if patient.gender! == "Male" {
+    if patient.gender! == "Male" || calculateAge(birthDate: patient.birth!) < 15 {
       femaleView.alpha = 0
     }
     recieveHistory()
@@ -176,59 +176,48 @@ class MedicalHistoryVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
     if !startedEditing {
       startedEditing = true
     }
-    if patient.history == nil, let context = patient.managedObjectContext {
-      let history = MedicalHistory(context: context)
-      history.thePatinet = patient
-      do {
-        try context.save()
-        createOrUpdateHistory(tag: tag, isFree: isFree)
-      } catch {
-        print(error)
+    let theHistory = patient.history!
+    if isFree {
+      switch tag {
+      case 0:
+        theHistory.allergy = nil
+      case 1:
+        theHistory.surgery = nil
+      case 2:
+        theHistory.liver = nil
+      case 3:
+        theHistory.pressure = false
+      case 4:
+        theHistory.diabetes = false
+      case 5:
+        theHistory.renal = false
+      case 6:
+        theHistory.pregnant = false
+      case 7:
+        theHistory.lactation = false
+      default:
+        break
       }
     } else {
-      let theHistory = patient.history!
-      if isFree {
-        switch tag {
-        case 0:
-          theHistory.allergy = nil
-        case 1:
-          theHistory.surgery = nil
-        case 2:
-          theHistory.liver = nil
-        case 3:
-          theHistory.pressure = false
-        case 4:
-          theHistory.diabetes = false
-        case 5:
-          theHistory.renal = false
-        case 6:
-          theHistory.pregnant = false
-        case 7:
-          theHistory.lactation = false
-        default:
-          break
-        }
-      } else {
-        switch tag {
-        case 0:
-          theHistory.allergy = ""
-        case 1:
-          theHistory.surgery = ""
-        case 2:
-          theHistory.liver = ""
-        case 3:
-          theHistory.pressure = true
-        case 4:
-          theHistory.diabetes = true
-        case 5:
-          theHistory.renal = true
-        case 6:
-          theHistory.pregnant = true
-        case 7:
-          theHistory.lactation = true
-        default:
-          break
-        }
+      switch tag {
+      case 0:
+        theHistory.allergy = ""
+      case 1:
+        theHistory.surgery = ""
+      case 2:
+        theHistory.liver = ""
+      case 3:
+        theHistory.pressure = true
+      case 4:
+        theHistory.diabetes = true
+      case 5:
+        theHistory.renal = true
+      case 6:
+        theHistory.pregnant = true
+      case 7:
+        theHistory.lactation = true
+      default:
+        break
       }
     }
   }

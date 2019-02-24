@@ -28,12 +28,15 @@ class PatientCell: UITableViewCell {
     let lastVisitString = patient.lastVisitDate != nil ? DateFormatter.localizedString(from: patient.lastVisitDate!, dateStyle: .medium, timeStyle: .none) : "--/--/----"
     dateLabel.text = "Last Visit: \(lastVisitString)"
     nameLabel.text = patient.name
-    ageLabel.text = "\(calculateAge(birthDate: patient.birth!)) Years"
+    let ageInYears = calculateAge(birthDate: patient.birth!)
+    if ageInYears > 0 {
+      ageLabel.text = "\(calculateAge(birthDate: patient.birth!)) Years"
+    } else {
+      ageLabel.text = "\(calculateMonths(patient.birth!)) Months"
+    }
     switch patient.status {
-    case 0:
-      statusImage.image = UIImage(named: "Logo")
     case 1:
-      statusImage.image = UIImage(named: "New")
+      statusImage.image = patient.isStillNew ? UIImage(named: "New") : UIImage(named: "Logo")
     case 2:
       statusImage.image = UIImage(named: "High risk")
     case 3:
@@ -43,10 +46,10 @@ class PatientCell: UITableViewCell {
     }
   }
   
-  private func calculateAge(birthDate: Date) -> Int {
+  private func calculateMonths(_ date: Date) -> Int {
     let calendar = Calendar.current
-    let ageComponents = calendar.dateComponents([.year], from: birthDate, to: Date())
-    return ageComponents.year!
+    let components = calendar.dateComponents([.month], from: date)
+    return components.month!
   }
   
 }

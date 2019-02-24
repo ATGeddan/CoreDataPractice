@@ -166,11 +166,11 @@
 			isa = PBXGroup;
 			children = (
 				262370862199DF7900F2E7DF /* PatientsTableVC.swift */,
-				26D64A3621B4497000CF5E11 /* PatientVC.swift */,
 				26D64A3821B44B9400CF5E11 /* MedicalHistoryVC.swift */,
 				26946E6B219C7B3C008B5311 /* AppointmentsTableViewController.swift */,
 				26D627A4219EE6E800B90741 /* AddOrEditAppointmentVC.swift */,
 				26770C3B21A08C4100BA3039 /* AddPatientVC.swift */,
+				26D64A3621B4497000CF5E11 /* PatientVC.swift */,
 				260A312A21A1B38E0035B747 /* AppointmentVC.swift */,
 				26C95B9A21A468FF004D7395 /* HomeVC.swift */,
 			);

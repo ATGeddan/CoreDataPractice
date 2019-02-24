@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+protocol EditingPatientDelegate: class{
+  func didEditPatient(_ patient: Patient)
+}
+
 class AddPatientVC: UIViewController, UITextFieldDelegate {
   
   @IBOutlet weak var addressField: SkyFloatingLabelTextField!
@@ -21,8 +25,16 @@ class AddPatientVC: UIViewController, UITextFieldDelegate {
   lazy var picker = UIDatePicker()
   private var chosenDate: Date?
   
+  weak var delegate: EditingPatientDelegate!  
+  var patientToEdit: Patient?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupView()
+    recieveEditedPatient()
+  }
+  
+  private func setupView() {
     nameField.delegate = self
     birthField.delegate = self
     phoneField.delegate = self
@@ -30,6 +42,15 @@ class AddPatientVC: UIViewController, UITextFieldDelegate {
     birthField.inputView = picker
     let rightButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneClicked))
     navigationItem.rightBarButtonItem = rightButton
+  }
+  
+  private func recieveEditedPatient() {
+    guard patientToEdit != nil else {return}
+    nameField.text = patientToEdit?.name
+    birthField.text = DateFormatter.localizedString(from: (patientToEdit?.birth)!, dateStyle: .medium, timeStyle: .none)
+    phoneField.text = patientToEdit?.phone
+    addressField.text = patientToEdit?.address ?? ""
+    genderSwitch.isOn = patientToEdit?.gender == "Male" ? true : false
   }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -42,9 +63,7 @@ class AddPatientVC: UIViewController, UITextFieldDelegate {
     case 1:
       guard !(textField.text?.isEmpty)! else {return}
       checkIfExists {[unowned self] (name) in
-        // Use the name to go back and search
-        if let theName = name {
-          print(theName) // Placeholder
+        if name != nil && name != self.patientToEdit?.name {
           self.nameField.errorMessage = "This patient already exists!"
         }
       }
@@ -81,7 +100,8 @@ class AddPatientVC: UIViewController, UITextFieldDelegate {
   }
   
   @objc private func doneClicked() {
-    let context = container.viewContext
+    view.endEditing(true)
+    let context = patientToEdit?.managedObjectContext ?? container.viewContext
     guard nameField.text != "", birthField.text != "", phoneField.text != "" else {
       presentBasicAlert(title: "Not yet", message: "Please fill in all the recommended fields.")
       return
@@ -95,16 +115,23 @@ class AddPatientVC: UIViewController, UITextFieldDelegate {
       return
     }
     let gender = genderSwitch.isOn ? "Male" : "Female"
-    let patient = Patient(context: context)
-    patient.name = nameField.text
-    patient.birth = chosenDate
-    patient.gender = gender
-    patient.phone = phoneField.text!
-    patient.address = addressField.text!
-    patient.date = Date()
-    patient.status = 1
+    let patient = patientToEdit != nil ? patientToEdit : Patient(context: context)
+    patient?.name = nameField.text
+    patient?.birth = chosenDate ?? patient?.birth
+    patient?.gender = gender
+    patient?.phone = phoneField.text!
+    patient?.address = addressField.text!
+    if patientToEdit == nil {
+      patient?.date = Date()
+      patient?.status = 1
+      let history = MedicalHistory(context: context)
+      history.thePatinet = patient
+    }
     do {
       try context.save()
+      if delegate != nil {
+        delegate?.didEditPatient(patientToEdit!)
+      }
       navigationController?.popViewController(animated: true)
     } catch {
       print(error)

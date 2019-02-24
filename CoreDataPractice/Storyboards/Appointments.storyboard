@@ -14,10 +14,11 @@
         <scene sceneID="oB4-3z-1KH">
             <objects>
                 <tableViewController id="tfM-zZ-NDF" customClass="AppointmentsTableViewController" customModule="CoreDataPractice" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lcl-B5-q3S">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lcl-B5-q3S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.95643120999999998" green="0.92176747319999996" blue="0.8157092333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="tfM-zZ-NDF" id="5t1-qr-chN"/>
                             <outlet property="delegate" destination="tfM-zZ-NDF" id="0sL-fj-oPe"/>
@@ -44,36 +45,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="khe-n0-1Ki">
-                                <rect key="frame" x="30" y="40" width="315" height="104.5"/>
+                                <rect key="frame" x="30" y="40" width="315" height="134.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhm-j7-hDN">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="23.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patient name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PF1-0f-dd1">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="21"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Operator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZq-cy-dLJ">
-                                        <rect key="frame" x="0.0" y="40.5" width="315" height="23.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhm-j7-hDN">
+                                        <rect key="frame" x="0.0" y="38" width="315" height="21"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assistant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKl-1q-CSK">
-                                        <rect key="frame" x="0.0" y="81" width="315" height="23.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Operator" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZq-cy-dLJ">
+                                        <rect key="frame" x="0.0" y="76" width="315" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                        <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assistant" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKl-1q-CSK">
+                                        <rect key="frame" x="0.0" y="113.5" width="315" height="21"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="104.5" id="5tk-lg-BWZ"/>
+                                    <constraint firstAttribute="height" constant="134.5" id="5tk-lg-BWZ"/>
                                 </constraints>
                             </stackView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Procedure ..." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Se6-wS-Q5J">
-                                <rect key="frame" x="30" y="154.5" width="315" height="115"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Procedure ..." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Se6-wS-Q5J">
+                                <rect key="frame" x="30" y="184.5" width="315" height="85"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="115" id="LQU-kX-N6K"/>
+                                    <constraint firstAttribute="height" constant="85" id="LQU-kX-N6K"/>
                                 </constraints>
                                 <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
@@ -144,6 +151,7 @@
                         <outlet property="assistantLabel" destination="gKl-1q-CSK" id="AFo-iD-jnh"/>
                         <outlet property="dateLabel" destination="Xhm-j7-hDN" id="2Dv-V3-vHd"/>
                         <outlet property="operatorLabel" destination="bZq-cy-dLJ" id="6FG-Tx-WZx"/>
+                        <outlet property="patientNameLabel" destination="PF1-0f-dd1" id="1MM-MT-8ol"/>
                         <outlet property="picsScrollView" destination="gUy-BF-ec6" id="8Gx-HR-DOt"/>
                         <outlet property="procedureView" destination="Se6-wS-Q5J" id="Jps-pg-m2U"/>
                         <outlet property="scrollWidth" destination="nZi-ys-JHb" id="X9I-89-sEe"/>

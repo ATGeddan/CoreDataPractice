@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--HomeVC-->
+        <!--MY SCHEDULE-->
         <scene sceneID="XRT-o3-nmt">
             <objects>
                 <viewController id="mg7-hd-MeM" customClass="HomeVC" customModule="CoreDataPractice" customModuleProvider="target" sceneMemberID="viewController">
@@ -89,7 +89,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="139-57-XXm"/>
                     </view>
-                    <navigationItem key="navigationItem" id="p2n-up-hde"/>
+                    <navigationItem key="navigationItem" title="MY SCHEDULE" id="p2n-up-hde">
+                        <barButtonItem key="backBarButtonItem" title=" " id="ZRV-DZ-KmR"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="buttonsToBottom" destination="sOc-Co-J2b" id="iIq-ft-L8J"/>
                         <outlet property="calendarMenuView" destination="QCP-Lg-3S8" id="0zK-SR-XfP"/>
@@ -127,7 +129,7 @@
             </objects>
             <point key="canvasLocation" x="-550" y="134"/>
         </scene>
-        <!--Patients TableVC-->
+        <!--PATIENTS-->
         <scene sceneID="t4Q-wD-aae">
             <objects>
                 <tableViewController storyboardIdentifier="UITableViewController-j3t-Jl-2Eh" id="Kff-xk-IVs" customClass="PatientsTableVC" customModule="CoreDataPractice" customModuleProvider="target" sceneMemberID="viewController">
@@ -142,7 +144,7 @@
                             <outlet property="delegate" destination="Kff-xk-IVs" id="Zws-Mf-g4m"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Cem-xM-qee">
+                    <navigationItem key="navigationItem" title="PATIENTS" id="Cem-xM-qee">
                         <barButtonItem key="backBarButtonItem" title=" " id="wPH-wX-aGv"/>
                     </navigationItem>
                     <connections>
@@ -163,7 +165,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpR-Tx-JqF" userLabel="Info View">
-                                <rect key="frame" x="10" y="8" width="355" height="287"/>
+                                <rect key="frame" x="10" y="-18" width="355" height="287"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info" translatesAutoresizingMaskIntoConstraints="NO" id="kmK-VZ-53y">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="287"/>
@@ -236,16 +238,253 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHU-ED-Af1" userLabel="Dentition View">
-                                <rect key="frame" x="0.0" y="2" width="375" height="267"/>
+                                <rect key="frame" x="0.0" y="-24" width="375" height="293"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dentitionBG" translatesAutoresizingMaskIntoConstraints="NO" id="Q0B-ck-V3c">
-                                        <rect key="frame" x="3" y="9" width="364" height="128"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="128" id="3uo-Dh-zEz"/>
-                                        </constraints>
+                                        <rect key="frame" x="3" y="20" width="364" height="161"/>
                                     </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="0Ts-nz-Hnu">
+                                        <rect key="frame" x="8" y="60.5" width="362" height="80"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nFD-Cy-9mF">
+                                                <rect key="frame" x="0.0" y="0.0" width="362" height="33"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="aId-mu-YbK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="176" height="33"/>
+                                                        <subviews>
+                                                            <button opaque="NO" tag="110" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vl9-9W-VQL" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="29.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="E">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="ohV-Yk-i2H"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="109" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXK-HP-gQu" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="36.5" y="0.0" width="29.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="D">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="Utx-TL-um4"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="108" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pe9-HA-52G" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="73" y="0.0" width="30" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="C">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="vdh-So-RmI"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="107" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hH9-Jw-z0S" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="110" y="0.0" width="29.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="B">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="SPQ-TP-skT"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="106" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4iQ-17-flw" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="146.5" y="0.0" width="29.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="A">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="daL-G9-gfO"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="X37-Qg-8xA">
+                                                        <rect key="frame" x="186" y="0.0" width="176" height="33"/>
+                                                        <subviews>
+                                                            <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJR-j3-ose" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="29" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="A">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="HcW-Bx-dBl"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xr3-cQ-ZUB" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="37" y="0.0" width="28.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="B">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="V19-uj-VFj"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iY-U6-Uo4" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="73.5" y="0.0" width="29" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="C">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="c8i-Kw-jy3"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vw-Y3-6tt" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="110.5" y="0.0" width="28.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="D">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="gbv-Dn-hyu"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4X9-0y-qKX" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="147" y="0.0" width="29" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="E">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="XHc-Ig-5QL"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="02x-NF-sYW">
+                                                <rect key="frame" x="0.0" y="47" width="362" height="33"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="bg9-Ml-TMp">
+                                                        <rect key="frame" x="0.0" y="0.0" width="176" height="33"/>
+                                                        <subviews>
+                                                            <button opaque="NO" tag="-110" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-kT-c5X" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="29.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="E">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="voo-Oh-6Hw"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="-109" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcJ-G3-dlX" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="36.5" y="0.0" width="29.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="D">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="XTU-LW-hf5"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="-108" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQ4-fJ-80j" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="73" y="0.0" width="30" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="C">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="5Rf-8G-dWb"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="-107" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="it6-cY-yR4" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="110" y="0.0" width="29.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="B">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="T1Y-Dz-7ey"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="-106" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAw-I5-gnu" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="146.5" y="0.0" width="29.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="A">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="Ex7-EI-xhr"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <viewLayoutGuide key="safeArea" id="hCT-qf-OqI"/>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QxD-q5-nYG">
+                                                        <rect key="frame" x="186" y="0.0" width="176" height="33"/>
+                                                        <subviews>
+                                                            <button opaque="NO" tag="-101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ska-Et-33p" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="29" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="A">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="7zd-s2-XqB"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="-102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHx-OI-416" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="37" y="0.0" width="28.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="B">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="8bt-z0-HHz"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="-103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UxH-cP-3zN" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="73.5" y="0.0" width="29" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="C">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="sAo-Wo-xTY"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="-104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rp2-hJ-myt" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="110.5" y="0.0" width="28.5" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="D">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="tYI-Kx-B9x"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="-105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yq7-m2-PuS" customClass="DentitionBtn" customModule="CoreDataPractice" customModuleProvider="target">
+                                                                <rect key="frame" x="147" y="0.0" width="29" height="33"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                                <state key="normal" title="E">
+                                                                    <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="V0f-sY-i2j"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <viewLayoutGuide key="safeArea" id="SNp-HP-moL"/>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="gXy-0r-5pf"/>
+                                        </constraints>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dce-Sx-oTh">
-                                        <rect key="frame" x="8" y="22" width="359" height="33"/>
+                                        <rect key="frame" x="8" y="20" width="359" height="33"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZBW-DW-Phb">
                                                 <rect key="frame" x="0.0" y="0.0" width="175.5" height="33"/>
@@ -254,7 +493,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="8">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="axl-gy-kxS"/>
@@ -264,7 +503,7 @@
                                                         <rect key="frame" x="22" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="7">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="bpP-8z-2Ps"/>
@@ -274,7 +513,7 @@
                                                         <rect key="frame" x="44" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="6">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="Rdb-q4-jg7"/>
@@ -284,7 +523,7 @@
                                                         <rect key="frame" x="66" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="5">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="dFv-iF-Nyi"/>
@@ -294,7 +533,7 @@
                                                         <rect key="frame" x="88" y="0.0" width="21.5" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="4">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="olQ-4d-Hqu"/>
@@ -304,7 +543,7 @@
                                                         <rect key="frame" x="109.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="3">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="j6P-58-yoa"/>
@@ -314,7 +553,7 @@
                                                         <rect key="frame" x="131.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="2">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="Z6x-K3-bVj"/>
@@ -324,7 +563,7 @@
                                                         <rect key="frame" x="153.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="1">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="eyz-wP-WDJ"/>
@@ -339,7 +578,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="1">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="fkQ-JX-CQm"/>
@@ -349,7 +588,7 @@
                                                         <rect key="frame" x="22" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="2">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="KO9-qj-L4n"/>
@@ -359,7 +598,7 @@
                                                         <rect key="frame" x="44" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="3">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="abn-ii-LnA"/>
@@ -369,7 +608,7 @@
                                                         <rect key="frame" x="66" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="4">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="Kjm-cC-YbO"/>
@@ -379,7 +618,7 @@
                                                         <rect key="frame" x="88" y="0.0" width="21.5" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="5">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="c1Z-Ef-Iy6"/>
@@ -389,7 +628,7 @@
                                                         <rect key="frame" x="109.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="6">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="F0H-Fx-CFX"/>
@@ -399,7 +638,7 @@
                                                         <rect key="frame" x="131.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="7">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="yvU-4k-zpc"/>
@@ -409,7 +648,7 @@
                                                         <rect key="frame" x="153.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="8">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="ONP-dv-Eb4"/>
@@ -418,12 +657,9 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="33" id="ylt-np-3r0"/>
-                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WsV-W5-CBp">
-                                        <rect key="frame" x="8" y="83" width="359" height="33"/>
+                                        <rect key="frame" x="8" y="149" width="359" height="33"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cc4-Zf-CCS">
                                                 <rect key="frame" x="0.0" y="0.0" width="175.5" height="33"/>
@@ -432,7 +668,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="8">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="Gia-KW-Q3g"/>
@@ -442,7 +678,7 @@
                                                         <rect key="frame" x="22" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="7">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="xfy-9B-mZd"/>
@@ -452,7 +688,7 @@
                                                         <rect key="frame" x="44" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="6">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="mdo-ja-b6x"/>
@@ -462,7 +698,7 @@
                                                         <rect key="frame" x="66" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="5">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="vlI-5k-60N"/>
@@ -472,7 +708,7 @@
                                                         <rect key="frame" x="88" y="0.0" width="21.5" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="4">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="20n-RW-JhG"/>
@@ -482,7 +718,7 @@
                                                         <rect key="frame" x="109.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="3">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="jLe-Kz-WNP"/>
@@ -492,7 +728,7 @@
                                                         <rect key="frame" x="131.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="2">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="ecN-Bc-mz1"/>
@@ -502,7 +738,7 @@
                                                         <rect key="frame" x="153.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="1">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="m7w-ZT-lTk"/>
@@ -517,7 +753,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="1">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="Ru6-S8-kAm"/>
@@ -527,7 +763,7 @@
                                                         <rect key="frame" x="22" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="2">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="npc-gE-4pG"/>
@@ -537,7 +773,7 @@
                                                         <rect key="frame" x="44" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="3">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="wXd-y6-jtJ"/>
@@ -547,7 +783,7 @@
                                                         <rect key="frame" x="66" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="4">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="H09-no-gfY"/>
@@ -557,7 +793,7 @@
                                                         <rect key="frame" x="88" y="0.0" width="21.5" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="5">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="vtu-CN-JFN"/>
@@ -567,7 +803,7 @@
                                                         <rect key="frame" x="109.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="6">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="KWX-D5-SCE"/>
@@ -577,7 +813,7 @@
                                                         <rect key="frame" x="131.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="7">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="Bso-jo-Ql1"/>
@@ -587,7 +823,7 @@
                                                         <rect key="frame" x="153.5" y="0.0" width="22" height="33"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                                         <state key="normal" title="8">
-                                                            <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="dentitionBtnPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="Zvd-4u-7R8"/>
@@ -598,9 +834,9 @@
                                         </subviews>
                                     </stackView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dentitionGuide" translatesAutoresizingMaskIntoConstraints="NO" id="EIz-4l-cT6">
-                                        <rect key="frame" x="5" y="149" width="365" height="110"/>
+                                        <rect key="frame" x="5" y="193" width="365" height="90"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="110" id="jrZ-dr-WbX"/>
+                                            <constraint firstAttribute="height" constant="90" id="jrZ-dr-WbX"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -610,15 +846,19 @@
                                     <constraint firstAttribute="trailing" secondItem="WsV-W5-CBp" secondAttribute="trailing" constant="8" id="BcM-8O-uWr"/>
                                     <constraint firstItem="dce-Sx-oTh" firstAttribute="leading" secondItem="SHU-ED-Af1" secondAttribute="leading" constant="8" id="C1V-y5-3C4"/>
                                     <constraint firstAttribute="trailing" secondItem="dce-Sx-oTh" secondAttribute="trailing" constant="8" id="Cbx-i3-NOx"/>
+                                    <constraint firstItem="WsV-W5-CBp" firstAttribute="top" secondItem="Q0B-ck-V3c" secondAttribute="bottom" constant="-32" id="DAH-eS-EBe"/>
                                     <constraint firstItem="EIz-4l-cT6" firstAttribute="leading" secondItem="SHU-ED-Af1" secondAttribute="leading" constant="5" id="FAo-vV-L9P"/>
-                                    <constraint firstItem="WsV-W5-CBp" firstAttribute="top" secondItem="dce-Sx-oTh" secondAttribute="bottom" constant="28" id="Hgv-3Z-2ry"/>
+                                    <constraint firstItem="0Ts-nz-Hnu" firstAttribute="leading" secondItem="SHU-ED-Af1" secondAttribute="leading" constant="8" id="LSj-kw-ObD"/>
                                     <constraint firstItem="Q0B-ck-V3c" firstAttribute="leading" secondItem="SHU-ED-Af1" secondAttribute="leading" constant="3" id="PRC-J9-Mnt"/>
-                                    <constraint firstAttribute="height" constant="267" id="Yme-DY-W5e"/>
+                                    <constraint firstAttribute="trailing" secondItem="0Ts-nz-Hnu" secondAttribute="trailing" constant="5" id="Wir-OQ-X3m"/>
+                                    <constraint firstAttribute="height" constant="293" id="Yme-DY-W5e"/>
                                     <constraint firstItem="WsV-W5-CBp" firstAttribute="leading" secondItem="SHU-ED-Af1" secondAttribute="leading" constant="8" id="ZB6-AD-FVN"/>
                                     <constraint firstAttribute="trailing" secondItem="Q0B-ck-V3c" secondAttribute="trailing" constant="8" id="azB-y5-BuI"/>
                                     <constraint firstAttribute="trailing" secondItem="EIz-4l-cT6" secondAttribute="trailing" constant="5" id="dFF-eW-sCm"/>
-                                    <constraint firstItem="Q0B-ck-V3c" firstAttribute="top" secondItem="dce-Sx-oTh" secondAttribute="bottom" constant="-46" id="uRS-E2-UEs"/>
-                                    <constraint firstAttribute="bottom" secondItem="EIz-4l-cT6" secondAttribute="bottom" constant="8" id="wdZ-Tf-5Zt"/>
+                                    <constraint firstItem="Q0B-ck-V3c" firstAttribute="top" secondItem="SHU-ED-Af1" secondAttribute="top" constant="20" id="lvj-GM-sET"/>
+                                    <constraint firstItem="0Ts-nz-Hnu" firstAttribute="centerY" secondItem="Q0B-ck-V3c" secondAttribute="centerY" id="mf1-0K-Xzb"/>
+                                    <constraint firstItem="Q0B-ck-V3c" firstAttribute="top" secondItem="dce-Sx-oTh" secondAttribute="bottom" constant="-33" id="uRS-E2-UEs"/>
+                                    <constraint firstAttribute="bottom" secondItem="EIz-4l-cT6" secondAttribute="bottom" constant="10" id="wdZ-Tf-5Zt"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jho-MA-yxN">
@@ -638,24 +878,6 @@
                                             <action selector="dentitionPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="iIn-11-YCT"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HdE-ZU-kS5">
-                                        <rect key="frame" x="295" y="39" width="49" height="70"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGz-h1-XGa">
-                                                <rect key="frame" x="0.0" y="0.0" width="49" height="31"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                                                <color key="textColor" red="0.070903293790000002" green="0.14904698729999999" blue="0.12548503280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ymo-aV-daK">
-                                                <rect key="frame" x="0.0" y="39" width="51" height="31"/>
-                                                <connections>
-                                                    <action selector="vipSwitched:" destination="IUx-WN-aHd" eventType="valueChanged" id="hbu-d7-nJL"/>
-                                                </connections>
-                                            </switch>
-                                        </subviews>
-                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ahmed Eltabbal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afh-V8-IQR">
                                         <rect key="frame" x="114" y="134" width="147" height="24"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
@@ -723,17 +945,30 @@
                                             <action selector="changePhoto:" destination="IUx-WN-aHd" eventType="touchUpInside" id="LVS-Cd-f0u"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QbJ-aJ-k4z">
+                                        <rect key="frame" x="289" y="8" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="MpV-8c-HF6"/>
+                                            <constraint firstAttribute="width" constant="60" id="xkj-R2-ow9"/>
+                                        </constraints>
+                                        <state key="normal" image="New"/>
+                                        <connections>
+                                            <action selector="statusButtonPressed:" destination="IUx-WN-aHd" eventType="touchUpInside" id="XCE-Im-idB"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.95643120999999998" green="0.92176747319999996" blue="0.8157092333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="S7X-WZ-IT5" secondAttribute="trailing" constant="10" id="8Rv-lG-XYQ"/>
                                     <constraint firstItem="pGz-eF-DfH" firstAttribute="centerX" secondItem="tzJ-jT-Q58" secondAttribute="centerX" id="BGl-JE-FHn"/>
                                     <constraint firstItem="pGz-eF-DfH" firstAttribute="top" secondItem="Deb-U4-mFm" secondAttribute="bottom" constant="-33" id="Ig1-39-hlb"/>
+                                    <constraint firstAttribute="trailing" secondItem="QbJ-aJ-k4z" secondAttribute="trailing" constant="26" id="Iwg-7F-PJc"/>
                                     <constraint firstItem="Deb-U4-mFm" firstAttribute="leading" secondItem="pGz-eF-DfH" secondAttribute="trailing" constant="-31" id="KqH-Vo-OdZ"/>
                                     <constraint firstAttribute="height" constant="268" id="NE2-bH-cGA"/>
                                     <constraint firstItem="tzJ-jT-Q58" firstAttribute="centerX" secondItem="Jho-MA-yxN" secondAttribute="centerX" id="Noy-FL-mIx"/>
                                     <constraint firstItem="Afh-V8-IQR" firstAttribute="top" secondItem="tzJ-jT-Q58" secondAttribute="bottom" constant="7" id="PBC-x1-xpA"/>
                                     <constraint firstItem="x65-9p-pdM" firstAttribute="leading" secondItem="S7X-WZ-IT5" secondAttribute="trailing" constant="-45" id="PUV-8H-oMs"/>
+                                    <constraint firstItem="QbJ-aJ-k4z" firstAttribute="top" secondItem="Jho-MA-yxN" secondAttribute="top" constant="8" id="PsP-rE-qww"/>
                                     <constraint firstItem="S7X-WZ-IT5" firstAttribute="top" secondItem="cpU-uH-ds7" secondAttribute="bottom" constant="8" id="Rx9-8X-IvZ"/>
                                     <constraint firstItem="tzJ-jT-Q58" firstAttribute="top" secondItem="Jho-MA-yxN" secondAttribute="top" constant="8" id="Tni-iz-JvG"/>
                                     <constraint firstItem="x65-9p-pdM" firstAttribute="centerY" secondItem="S7X-WZ-IT5" secondAttribute="centerY" id="U0N-uU-gKQ"/>
@@ -775,7 +1010,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.95643120999999998" green="0.92176747319999996" blue="0.8157092333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="kpR-Tx-JqF" firstAttribute="top" secondItem="Msi-MY-EMF" secondAttribute="bottom" constant="-300" id="1g9-xO-ZcT"/>
+                            <constraint firstItem="kpR-Tx-JqF" firstAttribute="top" secondItem="Msi-MY-EMF" secondAttribute="bottom" constant="-326" id="1g9-xO-ZcT"/>
                             <constraint firstItem="Jho-MA-yxN" firstAttribute="top" secondItem="Wa6-dT-H3W" secondAttribute="top" id="Din-bG-M5a"/>
                             <constraint firstItem="qaI-IL-POR" firstAttribute="centerY" secondItem="Msi-MY-EMF" secondAttribute="centerY" id="FXe-dN-BGQ"/>
                             <constraint firstItem="kpR-Tx-JqF" firstAttribute="leading" secondItem="Wa6-dT-H3W" secondAttribute="leading" constant="10" id="JHB-47-AR0"/>
@@ -795,9 +1030,11 @@
                     <connections>
                         <outlet property="addressLabel" destination="JeG-Eb-mQa" id="pmc-aR-y7D"/>
                         <outlet property="birthLabel" destination="hHf-du-g3V" id="MUq-0O-Ipl"/>
+                        <outlet property="decidiousStack" destination="0Ts-nz-Hnu" id="VwK-cD-K35"/>
                         <outlet property="dentitionArrow" destination="x65-9p-pdM" id="jzw-U5-6tr"/>
                         <outlet property="dentitionConstraint" destination="L9U-m0-Ld8" id="vwH-8e-J9R"/>
                         <outlet property="genderLabel" destination="ScV-kM-fYe" id="uhA-DF-hIA"/>
+                        <outlet property="guideHeight" destination="jrZ-dr-WbX" id="cIV-If-rR2"/>
                         <outlet property="imageFrame" destination="pGz-eF-DfH" id="tbT-uq-RtK"/>
                         <outlet property="infoArrow" destination="qaI-IL-POR" id="Atc-TS-75u"/>
                         <outlet property="infoTopConstraint" destination="1g9-xO-ZcT" id="7Q6-xB-A1Q"/>
@@ -806,7 +1043,7 @@
                         <outlet property="nextVisitLabel" destination="iLz-Gl-ewF" id="w9G-sJ-MMf"/>
                         <outlet property="patientPhoto" destination="tzJ-jT-Q58" id="lM6-4I-zGE"/>
                         <outlet property="phoneLabel" destination="Ti3-s9-Mnh" id="QRa-TH-Mgw"/>
-                        <outlet property="vipSwitch" destination="Ymo-aV-daK" id="Zo2-SQ-Rq0"/>
+                        <outlet property="statusBtn" destination="QbJ-aJ-k4z" id="KpQ-qt-xwa"/>
                         <outletCollection property="dentitionButtons" destination="gzo-CK-Xcq" collectionClass="NSMutableArray" id="RHA-8l-UD8"/>
                         <outletCollection property="dentitionButtons" destination="aWe-QM-9Tl" collectionClass="NSMutableArray" id="pHz-RI-wdS"/>
                         <outletCollection property="dentitionButtons" destination="EdH-Dk-aPn" collectionClass="NSMutableArray" id="uUz-Dc-e2N"/>
@@ -843,11 +1080,34 @@
                         <outletCollection property="actionButtons" destination="wja-Es-lBL" collectionClass="NSMutableArray" id="oh8-sh-BFn"/>
                         <outletCollection property="actionButtons" destination="S7X-WZ-IT5" collectionClass="NSMutableArray" id="OF5-4C-J9n"/>
                         <outletCollection property="actionButtons" destination="Msi-MY-EMF" collectionClass="NSMutableArray" id="iYU-lF-a8O"/>
+                        <outletCollection property="permenantStacks" destination="dce-Sx-oTh" collectionClass="NSMutableArray" id="cmV-t6-qHU"/>
+                        <outletCollection property="permenantStacks" destination="WsV-W5-CBp" collectionClass="NSMutableArray" id="GKp-nN-7xs"/>
+                        <outletCollection property="dentitionButtons" destination="pXK-HP-gQu" collectionClass="NSMutableArray" id="dgd-Qq-YgS"/>
+                        <outletCollection property="dentitionButtons" destination="xr3-cQ-ZUB" collectionClass="NSMutableArray" id="Txn-by-prK"/>
+                        <outletCollection property="dentitionButtons" destination="0vw-Y3-6tt" collectionClass="NSMutableArray" id="BUP-zO-ceE"/>
+                        <outletCollection property="dentitionButtons" destination="4X9-0y-qKX" collectionClass="NSMutableArray" id="Z9x-PJ-ljC"/>
+                        <outletCollection property="dentitionButtons" destination="vl9-9W-VQL" collectionClass="NSMutableArray" id="pZ8-K6-QwL"/>
+                        <outletCollection property="dentitionButtons" destination="RJR-j3-ose" collectionClass="NSMutableArray" id="FSK-bW-kvj"/>
+                        <outletCollection property="dentitionButtons" destination="pe9-HA-52G" collectionClass="NSMutableArray" id="GGI-z2-rCQ"/>
+                        <outletCollection property="dentitionButtons" destination="1iY-U6-Uo4" collectionClass="NSMutableArray" id="E7s-wP-j3v"/>
+                        <outletCollection property="dentitionButtons" destination="hH9-Jw-z0S" collectionClass="NSMutableArray" id="EOe-UT-6Dc"/>
+                        <outletCollection property="dentitionButtons" destination="4iQ-17-flw" collectionClass="NSMutableArray" id="aSC-dS-KfN"/>
+                        <outletCollection property="dentitionButtons" destination="TcJ-G3-dlX" collectionClass="NSMutableArray" id="sF2-cI-1BK"/>
+                        <outletCollection property="dentitionButtons" destination="KQ4-fJ-80j" collectionClass="NSMutableArray" id="et3-RV-JdG"/>
+                        <outletCollection property="dentitionButtons" destination="UxH-cP-3zN" collectionClass="NSMutableArray" id="TSK-4c-hI9"/>
+                        <outletCollection property="dentitionButtons" destination="Ska-Et-33p" collectionClass="NSMutableArray" id="gmb-C9-2I2"/>
+                        <outletCollection property="dentitionButtons" destination="sbu-kT-c5X" collectionClass="NSMutableArray" id="Y87-9J-XVe"/>
+                        <outletCollection property="dentitionButtons" destination="Rp2-hJ-myt" collectionClass="NSMutableArray" id="hVg-9C-9Ur"/>
+                        <outletCollection property="dentitionButtons" destination="Yq7-m2-PuS" collectionClass="NSMutableArray" id="mC4-Sd-3Qv"/>
+                        <outletCollection property="dentitionButtons" destination="bAw-I5-gnu" collectionClass="NSMutableArray" id="SU8-3b-Rgp"/>
+                        <outletCollection property="dentitionButtons" destination="RHx-OI-416" collectionClass="NSMutableArray" id="lCq-4o-fUQ"/>
+                        <outletCollection property="dentitionButtons" destination="it6-cY-yR4" collectionClass="NSMutableArray" id="e3L-aX-5c7"/>
+                        <segue destination="u8P-Sd-6XF" kind="show" identifier="editPatient" id="g7b-Dq-fiR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9vb-WL-1T9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2141.5999999999999" y="384.55772113943033"/>
+            <point key="canvasLocation" x="2045.5999999999999" y="423.23838080959524"/>
         </scene>
         <!--MEDICAL HISTORY-->
         <scene sceneID="vBr-BA-aBu">
@@ -1519,7 +1779,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RvY-QE-UGu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2141.5999999999999" y="-286.50674662668666"/>
+            <point key="canvasLocation" x="2855" y="-275"/>
         </scene>
         <!--Appointments-->
         <scene sceneID="C5a-Ja-2Xk">
@@ -1532,6 +1792,7 @@
     </scenes>
     <resources>
         <image name="FreeOff" width="88" height="63"/>
+        <image name="New" width="83" height="84"/>
         <image name="NotOff" width="88" height="63"/>
         <image name="arrow" width="13" height="18.5"/>
         <image name="dentitionBG" width="359" height="116"/>
@@ -1540,6 +1801,7 @@
         <image name="info" width="362" height="257"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LDO-qT-BWD"/>
+        <segue reference="cpg-Qr-sk1"/>
+        <segue reference="g7b-Dq-fiR"/>
     </inferredMetricsTieBreakers>
 </document>
