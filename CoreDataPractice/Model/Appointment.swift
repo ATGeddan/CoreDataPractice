@@ -11,6 +11,11 @@ import CoreData
 
 class Appointment: NSManagedObject {
   
-
+  override func prepareForDeletion() {
+    let context = AppDelegate.context
+    let manager = Manager.getManagerForDate(date: date!, context: context)
+    manager?.income?.appointmentsNumber -= 1
+    try? context.save()
+  }
   
 }

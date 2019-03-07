@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     IQKeyboardManager.shared.enable = true
     IQKeyboardManager.shared.overrideKeyboardAppearance = true
     IQKeyboardManager.shared.keyboardAppearance = .dark
-    IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Dismiss"
+    IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Done"
     return true
   }
 
@@ -96,8 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   static var persistentContainer: NSPersistentContainer {
     return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-    // Call it using AppDelegate.persistentContainer
   }
+  
   static var context: NSManagedObjectContext {
     return persistentContainer.viewContext
   }

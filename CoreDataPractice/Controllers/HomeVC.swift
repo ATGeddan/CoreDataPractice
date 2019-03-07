@@ -22,9 +22,9 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
   @IBOutlet weak var showAppointsBtn: UIButton!
   @IBOutlet weak var buttonsToBottom: NSLayoutConstraint!
   
-  let container = AppDelegate.persistentContainer
-  var appointDates = [CVDate]()
-  var highlightedDate: Date!
+  fileprivate let container = AppDelegate.persistentContainer
+  fileprivate var appointDates = [CVDate]()
+  fileprivate var highlightedDate: Date!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,7 +34,7 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     fetchAppointments()
-
+    checkManager()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -75,8 +75,19 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
     } catch {
       print(error)
     }
-
-    
+  }
+  
+  private func checkManager() {
+    let context = container.viewContext
+    if Manager.getManagerForDate(date: Date(), context: context) == nil {
+      let manager = Manager(context: context)
+      manager.newMonthManager(context: context)
+      do {
+        try context.save()
+      } catch {
+        print(error)
+      }
+    }
   }
   
   func presentationMode() -> CalendarMode {
@@ -114,9 +125,9 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
   private func toggleShowAppointsButton(hasAppoints: Bool) {
     if hasAppoints {
       // Show the Button
-      UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {[weak self] in
-        self?.buttonsToBottom.constant = 45
-        self?.view.layoutIfNeeded()
+      UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+        self.buttonsToBottom.constant = 5
+        self.view.layoutIfNeeded()
       }) {[weak self] ended in
         if ended {
           self?.showAppointsBtn.isEnabled = true
@@ -125,9 +136,9 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
     } else {
       // Hide the Button
       showAppointsBtn.isEnabled = false
-      UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {[weak self] in
-        self?.buttonsToBottom.constant = 135
-        self?.view.layoutIfNeeded()
+      UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
+        self.buttonsToBottom.constant = -76
+        self.view.layoutIfNeeded()
       })
     }
     
@@ -179,6 +190,9 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
     return monthName
   }
   
+  @IBAction func managerPressed(_ sender: UIBarButtonItem) {
+    performSegue(withIdentifier: "showManager", sender: nil)
+  }
   
   @IBAction func showAppointsClicked(_ sender: UIButton) {
     performSegue(withIdentifier: "showAppointments", sender: nil)
@@ -186,7 +200,7 @@ class HomeVC: UIViewController, CVCalendarViewDelegate, CVCalendarMenuViewDelega
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
-    if let destination = segue.destination as? AppointmentsTableViewController, let theDate = highlightedDate {
+    if let destination = segue.destination as? AppointmentsTableVC, let theDate = highlightedDate {
       destination.dateFromCalendar = theDate
     }
   }

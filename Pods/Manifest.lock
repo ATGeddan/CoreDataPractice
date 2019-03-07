@@ -1,20 +1,26 @@
 PODS:
-  - CVCalendar (1.6.1)
+  - Charts (3.2.2):
+    - Charts/Core (= 3.2.2)
+  - Charts/Core (3.2.2)
+  - CVCalendar (1.6.2)
   - IQKeyboardManagerSwift (6.2.0)
 
 DEPENDENCIES:
+  - Charts
   - CVCalendar (~> 1.6.1)
   - IQKeyboardManagerSwift
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Charts
     - CVCalendar
     - IQKeyboardManagerSwift
 
 SPEC CHECKSUMS:
-  CVCalendar: 505c11b11a088b43f159806e791eba1c2540853b
+  Charts: f69cf0518b6d1d62608ca504248f1bbe0b6ae77e
+  CVCalendar: 515092247b9c5059855643c2a2220f259bd5417f
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
 
-PODFILE CHECKSUM: 5688c61d3e120ff54b31f167d8c1bbe08c67eed9
+PODFILE CHECKSUM: f1b3702250b26f6b690fddedfaeb539523dbbf76
 
 COCOAPODS: 1.5.0

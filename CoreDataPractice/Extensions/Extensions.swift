@@ -32,6 +32,18 @@ extension UIViewController {
     present(alert,animated: true)
   }
   
+  func createDateTimePicker(forField textField: UITextField,withPicker picker: UIDatePicker, mode : UIDatePicker.Mode = .date, selector: Selector) {
+    let toolbar = UIToolbar()
+    toolbar.sizeToFit()
+    
+    let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: selector)
+    toolbar.setItems([done], animated: true)
+    toolbar.tintColor = UIColor.darkGray
+    textField.inputAccessoryView = toolbar
+    textField.inputView = picker
+    picker.datePickerMode = mode
+  }
+  
 }
 
 func calculateAge(birthDate: Date) -> Int {
@@ -68,5 +80,11 @@ extension UIView {
     self.layer.shadowOffset = offset
     self.layer.shadowOpacity = opacity
     self.layer.shadowRadius = radius
+  }
+}
+
+extension Int32 {
+  static func parse(fromString string: String) -> Int32 {
+    return Int32(string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()) ?? 0
   }
 }

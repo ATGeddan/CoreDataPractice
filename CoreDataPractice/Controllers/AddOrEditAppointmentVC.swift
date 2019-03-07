@@ -15,12 +15,15 @@ class AddOrEditAppointmentVC: UIViewController, UITextViewDelegate {
   @IBOutlet weak var assistantField: SkyFloatingLabelTextField!
   @IBOutlet weak var operatorField: SkyFloatingLabelTextField!
   @IBOutlet weak var dateField: SkyFloatingLabelTextField!
+  @IBOutlet weak var costField: SkyFloatingLabelTextField!
   
   lazy var picker = UIDatePicker()
   var chosenDate: Date?
   var patient: Patient!
-  var appointment: Appointment!
+  var appointmentToEdit: Appointment!
   var delegate: DidEditAppointmentDelegate!
+  private var previousCost: Int32 = 0
+  private var theManager: Manager?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -33,16 +36,28 @@ class AddOrEditAppointmentVC: UIViewController, UITextViewDelegate {
     let rightButton = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveAppointment))
     navigationItem.rightBarButtonItem = rightButton
     recieveAppointmentToEdit()
-    createDateTimePicker()
+    createDateTimePicker(forField: dateField,withPicker: picker, mode : .dateAndTime,selector: #selector(doneWithDateTime))
+    getManager()
   }
   
   private func recieveAppointmentToEdit() {
-    if appointment != nil {
-      dateField.text = DateFormatter.localizedString(from: appointment.date!, dateStyle: .medium, timeStyle: .short)
-      chosenDate = appointment.date
-      operatorField.text = appointment.theOperator
-      assistantField.text = appointment.assistant ?? ""
-      procedureView.text = appointment.procedure
+    if appointmentToEdit != nil {
+      dateField.text = DateFormatter.localizedString(from: appointmentToEdit.date!, dateStyle: .medium, timeStyle: .short)
+      chosenDate = appointmentToEdit.date
+      operatorField.text = appointmentToEdit.theOperator
+      assistantField.text = appointmentToEdit.assistant ?? ""
+      if appointmentToEdit.cost != 0 {
+        costField.text = String(appointmentToEdit.cost)
+        previousCost = appointmentToEdit.cost
+      }
+      procedureView.text = appointmentToEdit.procedure
+    }
+  }
+  
+  fileprivate func getManager() {
+    let context = AppDelegate.context
+    if let manager = Manager.getManagerForDate(date: Date(), context: context) {
+      theManager = manager
     }
   }
   
@@ -74,25 +89,35 @@ class AddOrEditAppointmentVC: UIViewController, UITextViewDelegate {
       return
     }
     var context: NSManagedObjectContext!
-    if appointment == nil {
-      context = patient.managedObjectContext
-      appointment = Appointment(context: context)
-      appointment.thePatient = patient
+    if appointmentToEdit == nil {
+      context = AppDelegate.persistentContainer.viewContext
+      appointmentToEdit = Appointment(context: context)
+      appointmentToEdit.thePatient = patient
+      appointmentToEdit.thePatient?.totalFees += Int32.parse(fromString: costField.text!)
+      updateManagerAppointmentsNumber()
     } else {
-      context = appointment.managedObjectContext
+      context = appointmentToEdit.managedObjectContext
+      let cost = Int32.parse(fromString: costField.text!)
+      appointmentToEdit.thePatient?.totalFees += previousCost != 0 ? cost - previousCost : cost
     }
-    appointment.date = chosenDate
-    appointment.theOperator = operatorField.text
-    appointment.assistant = assistantField.text
-    appointment.procedure = procedureView.text 
+    appointmentToEdit.date = chosenDate
+    appointmentToEdit.theOperator = operatorField.text
+    appointmentToEdit.assistant = assistantField.text
+    appointmentToEdit.procedure = procedureView.text 
     let dateformatter = DateFormatter()
     dateformatter.dateFormat = "dd.MM.yy"
-    appointment.comparisonDate = dateformatter.string(from: chosenDate!)
-    appointment.id = UUID().uuidString
+    appointmentToEdit.comparisonDate = dateformatter.string(from: chosenDate!)
+    appointmentToEdit.id = UUID().uuidString
+    if !(costField.text?.isEmpty)! || costField.text == "0" {
+      appointmentToEdit.cost = Int32.parse(fromString: costField.text!)
+    } else {
+      appointmentToEdit.cost = 0
+      delegate?.didRemoveCost()
+    }
     do {
       try context.save()
       if delegate != nil {
-        delegate.didEditAppointment(appointment)
+        delegate.didEditAppointment(appointmentToEdit)
       }
       navigationController?.popViewController(animated: true)
     } catch {
@@ -100,16 +125,29 @@ class AddOrEditAppointmentVC: UIViewController, UITextViewDelegate {
     }
   }
   
-  private func createDateTimePicker() {
-    let toolbar = UIToolbar()
-    toolbar.sizeToFit()
+  private func updateManagerAppointmentsNumber() {
+    if isSameMonth() {
+      theManager?.income?.appointmentsNumber += 1
+    } else {
+      let context = AppDelegate.context
+      if let manager = Manager.getManagerForDate(date: chosenDate!,context: context) {
+        manager.income?.appointmentsNumber += 1
+      } else {
+        let manager = Manager(context: context)
+        manager.newMonthManager(context: context)
+        manager.month = chosenDate
+        manager.income?.appointmentsNumber = 1
+      }
+    }
+  }
+  
+  private func isSameMonth() -> Bool {
+    let calendar = Calendar.current
+    let presentDateComponents = calendar.dateComponents([.month], from: Date())
+    let appointmentComponents = calendar.dateComponents([.month], from: chosenDate!)
     
-    let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneWithDateTime))
-    toolbar.setItems([done], animated: true)
-    toolbar.tintColor = UIColor.darkGray
-    dateField.inputAccessoryView = toolbar
-    dateField.inputView = picker
-    picker.datePickerMode = .dateAndTime
+    let sameMonth = presentDateComponents.month == appointmentComponents.month
+    return sameMonth
   }
   
   @objc private func doneWithDateTime() {

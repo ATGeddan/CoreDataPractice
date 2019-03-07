@@ -1,5 +1,5 @@
 //
-//  AppointmentsTableViewController.swift
+//  AppointmentsTableVC.swift
 //  CoreDataPractice
 //
 //  Created by Ahmed Eltabbal on 11/14/18.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AppointmentsTableViewController: CoreDataTableViewController {
+class AppointmentsTableVC: CoreDataTableViewController {
   
   var patient: Patient?
   var dateFromCalendar: Date!

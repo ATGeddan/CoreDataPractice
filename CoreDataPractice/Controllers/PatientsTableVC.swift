@@ -61,7 +61,7 @@ class PatientsTableVC: CoreDataTableViewController, UISearchResultsUpdating {
     let context = container.viewContext
     let request: NSFetchRequest<Patient> = Patient.fetchRequest()
 //    let selector = #selector(NSString.caseInsensitiveCompare(_:))
-    let sort1 = NSSortDescriptor(key: "date", ascending: true)
+    let sort1 = NSSortDescriptor(key: "date", ascending: false)
     let sort2 = NSSortDescriptor(key: "status", ascending: false)
     request.sortDescriptors = [sort2,sort1]
     fetchedResultsController = NSFetchedResultsController<Patient>(

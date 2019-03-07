@@ -21,24 +21,26 @@ class AddPatientVC: UIViewController, UITextFieldDelegate {
   @IBOutlet weak var birthField: SkyFloatingLabelTextField!
   @IBOutlet weak var nameField: SkyFloatingLabelTextField!
   
-  let container = AppDelegate.persistentContainer
+  private let container = AppDelegate.persistentContainer
   lazy var picker = UIDatePicker()
   private var chosenDate: Date?
   
   weak var delegate: EditingPatientDelegate!  
   var patientToEdit: Patient?
+  private var theManager: Manager?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()
     recieveEditedPatient()
+    getManager()
   }
   
   private func setupView() {
     nameField.delegate = self
     birthField.delegate = self
     phoneField.delegate = self
-    createDateTimePicker()
+    createDateTimePicker(forField: birthField,withPicker: picker,selector: #selector(doneWithDateTime))
     birthField.inputView = picker
     let rightButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneClicked))
     navigationItem.rightBarButtonItem = rightButton
@@ -50,7 +52,14 @@ class AddPatientVC: UIViewController, UITextFieldDelegate {
     birthField.text = DateFormatter.localizedString(from: (patientToEdit?.birth)!, dateStyle: .medium, timeStyle: .none)
     phoneField.text = patientToEdit?.phone
     addressField.text = patientToEdit?.address ?? ""
-    genderSwitch.isOn = patientToEdit?.gender == "Male" ? true : false
+    genderSwitch.isOn = (patientToEdit?.gender == "Male")
+  }
+  
+  fileprivate func getManager() {
+    let context = container.viewContext
+    if let manager = Manager.getManagerForDate(date: Date(), context: context) {
+      theManager = manager
+    }
   }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -124,6 +133,7 @@ class AddPatientVC: UIViewController, UITextFieldDelegate {
     if patientToEdit == nil {
       patient?.date = Date()
       patient?.status = 1
+      theManager?.income?.patientsNumber += 1
       let history = MedicalHistory(context: context)
       history.thePatinet = patient
     }
@@ -136,18 +146,6 @@ class AddPatientVC: UIViewController, UITextFieldDelegate {
     } catch {
       print(error)
     }
-  }
-  
-  private func createDateTimePicker() {
-    let toolbar = UIToolbar()
-    toolbar.sizeToFit()
-    
-    let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneWithDateTime))
-    toolbar.setItems([done], animated: true)
-    toolbar.tintColor = UIColor.darkGray
-    birthField.inputAccessoryView = toolbar
-    birthField.inputView = picker
-    picker.datePickerMode = .date
   }
   
   @objc private func doneWithDateTime() {

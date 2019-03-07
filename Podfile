@@ -8,5 +8,6 @@ target 'CoreDataPractice' do
   # Pods for CoreDataPractice
 pod 'IQKeyboardManagerSwift'
 pod 'CVCalendar', '~> 1.6.1'
+pod 'Charts'
 
 end

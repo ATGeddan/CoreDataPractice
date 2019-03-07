@@ -12,11 +12,13 @@ import Photos
 
 protocol DidEditAppointmentDelegate {
   func didEditAppointment(_ appoint: Appointment)
+  func didRemoveCost()
 }
 
-class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DidEditAppointmentDelegate {
+class AppointmentVC: UIViewController, UITextFieldDelegate ,UIImagePickerControllerDelegate, UINavigationControllerDelegate, DidEditAppointmentDelegate {
   
-  @IBOutlet weak var patientNameLabel: UILabel!
+  @IBOutlet weak var costLabel: UILabel!
+  @IBOutlet weak var costField: SkyFloatingLabelTextField!
   @IBOutlet weak var addPhotoBtn2: UIButton!
   @IBOutlet weak var addPhotoBtn: UIButton!
   @IBOutlet weak var picsScrollView: UIScrollView!
@@ -30,11 +32,12 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
   var appointment: Appointment?
   var allImgs = [Picture]()
   lazy var imagePicker = UIImagePickerController()
-  let container = AppDelegate.persistentContainer
-  var theContext: NSManagedObjectContext!
+  private let container = AppDelegate.persistentContainer
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    costField.delegate = self
+    costLabel.isHidden = true
     setupEditButton()
     setupAppointmentData()
     fetchAppointmentPictures()
@@ -43,6 +46,23 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
   func didEditAppointment(_ appoint: Appointment) {
     appointment = appoint
     setupAppointmentData()
+  }
+  
+  func didRemoveCost() {
+    setupCost()
+  }
+  
+  private func setupCost() {
+    if let cost = appointment?.cost, cost != 0 {
+      costField.isHidden = true
+      costLabel.text = "\(cost)L.E."
+      costLabel.isHidden = false
+    } else {
+      costField.isHidden = false
+      costLabel.isHidden = true
+      costField.text = ""
+      costLabel.text = ""
+    }
   }
   
   private func setupAppointmentData() {
@@ -54,7 +74,8 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     dateLabel.text = dateString
     operatorLabel.text = "Operator: \(theOperator)"
     procedureView.text = "Procedure : \(procedure)"
-    patientNameLabel.text = name
+    setupCost()
+    navigationItem.title = name
     
     if let assistant = appointment?.assistant, assistant != "" {
       assistantLabel.isHidden = false
@@ -75,6 +96,27 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     performSegue(withIdentifier: "toEditAppoint", sender: appointment)
   }
   
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    let cost = Int32.parse(fromString: textField.text!)
+    appointment?.cost = cost
+    do {
+      try appointment?.managedObjectContext?.save()
+      textField.isHidden = true
+      costLabel.text = "\(cost)L.E."
+      costLabel.isHidden = false
+      if let patient = appointment?.thePatient {
+        patient.totalFees += cost
+      }
+    } catch {
+      print(error.localizedDescription)
+    }    
+  }
+  
   private func fetchAppointmentPictures() {
     allImgs = []
     let request: NSFetchRequest<Picture> = Picture.fetchRequest()
@@ -83,7 +125,6 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     request.predicate = NSPredicate(format: "theAppointment = %@", appointment!)
     container.performBackgroundTask { [weak self] context in
       do {
-        self?.theContext = context
         let allImgs = try context.fetch(request)
         self?.allImgs = allImgs
         self?.handleFetchedPictures((self?.allImgs)!)
@@ -103,15 +144,13 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
   
   func relayPictures(_ thisImg: SLImageView) {
     picsScrollView.addSubview(thisImg)
-    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {[weak self] in
-      self?.view.layoutIfNeeded()
+    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+      self.view.layoutIfNeeded()
       thisImg.alpha = 1
-      if let pictures = self?.picsScrollView.subviews {
-        for pic in pictures {
-          if let thisPic = pic as? SLImageView, thisPic.imageID >= 0 {
-            thisPic.imageID += 1
-            thisPic.center.x += 260
-          }
+      for pic in self.picsScrollView.subviews {
+        if let thisPic = pic as? SLImageView, thisPic.imageID >= 0 {
+          thisPic.imageID += 1
+          thisPic.center.x += 260
         }
       }
     }) { [weak self]_ in
@@ -137,6 +176,7 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
   }
   
   @objc private func saveDeleteAlert(_ sender: UILongPressGestureRecognizer) {
+    
     let actionSheet = UIAlertController(title: "Save or Delete", message: "Do you want to save or delete this image?", preferredStyle: .actionSheet)
     actionSheet.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak self]_ in
       if let thisImage = sender.view as? SLImageView {
@@ -155,6 +195,7 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
   }
   
   private func deleteTriggered(_ sender: UILongPressGestureRecognizer) {
+    
     if let thisImg = sender.view as? SLImageView {
       let theObject = allImgs[thisImg.imageID]
       guard let context = theObject.managedObjectContext else {return}
@@ -162,15 +203,13 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
       try? context.save()
       
       imageCache.removeObject(forKey: theObject.id as AnyObject)
-      UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {[weak self] in
-        self?.view.layoutIfNeeded()
+      UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+        self.view.layoutIfNeeded()
         thisImg.alpha = 0
-        if let pictures = self?.picsScrollView.subviews {
-          for pic in pictures {
-            if let thisPic = pic as? SLImageView, thisPic.imageID > thisImg.imageID {
-              thisPic.imageID -= 1
-              thisPic.center.x -= 260
-            }
+        for pic in self.picsScrollView.subviews {
+          if let thisPic = pic as? SLImageView, thisPic.imageID > thisImg.imageID {
+            thisPic.imageID -= 1
+            thisPic.center.x -= 260
           }
         }
       }) { [weak self]_ in
@@ -218,7 +257,7 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     }
   }
   
-  fileprivate func handleAccessDeny() {
+  private func handleAccessDeny() {
     let alert = UIAlertController(title: "Access denied", message: "You need to allow (APP NAME) access to your gallery to upload an image.", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Go to settings", style: .default, handler: { _ in
       let settingsUrl = NSURL(string:UIApplication.openSettingsURLString)
@@ -274,7 +313,7 @@ class AppointmentVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let dest = segue.destination as? AddOrEditAppointmentVC, let appoint = sender as? Appointment {
       dest.delegate = self
-      dest.appointment = appoint
+      dest.appointmentToEdit = appoint
     }
   }
   

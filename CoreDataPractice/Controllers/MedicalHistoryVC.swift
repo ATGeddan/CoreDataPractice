@@ -249,32 +249,32 @@ class MedicalHistoryVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
       selectedNot.isEnabled = true
       selectedFree.setImage(UIImage(named: "FreeOn"), for: .normal)
       selectedNot.setImage(UIImage(named: "NotOff"), for: .normal)
-      UIView.animate(withDuration: 0.1, animations: {[weak self] in
+      UIView.animate(withDuration: 0.1, animations: {
         switch tag {
         case 0:
-          self?.allergyField.alpha = 0
+          self.allergyField.alpha = 0
         case 1:
-          self?.surgeryField.alpha = 0
+          self.surgeryField.alpha = 0
         case 2:
-          self?.liverField.alpha = 0
+          self.liverField.alpha = 0
         default:
           break
         }
-        self?.view.layoutIfNeeded()
+        self.view.layoutIfNeeded()
       }) {completed in
         if completed {
-          UIView.animate(withDuration: 0.2, animations: {[weak self] in
+          UIView.animate(withDuration: 0.2, animations: {
             switch tag {
             case 0:
-              self?.showAllergy.constant = -50
+              self.showAllergy.constant = -50
             case 1:
-              self?.showSurgery.constant = -50
+              self.showSurgery.constant = -50
             case 2:
-              self?.showLiver.constant = -50
+              self.showLiver.constant = -50
             default:
               break
             }
-            self?.view.layoutIfNeeded()
+            self.view.layoutIfNeeded()
           })
         }
       }
@@ -283,32 +283,32 @@ class MedicalHistoryVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
       selectedNot.isEnabled = false
       selectedFree.setImage(UIImage(named: "FreeOff"), for: .normal)
       selectedNot.setImage(UIImage(named: "NotOn"), for: .normal)
-      UIView.animate(withDuration: 0.2, animations: {[weak self] in
+      UIView.animate(withDuration: 0.2, animations: {
         switch tag {
         case 0:
-          self?.showAllergy.constant = -10
+          self.showAllergy.constant = -10
         case 1:
-          self?.showSurgery.constant = -10
+          self.showSurgery.constant = -10
         case 2:
-          self?.showLiver.constant = -10
+          self.showLiver.constant = -10
         default:
           break
         }
-        self?.view.layoutIfNeeded()
+        self.view.layoutIfNeeded()
       }) {completed in
         if completed {
-          UIView.animate(withDuration: 0.1, animations: {[weak self] in
+          UIView.animate(withDuration: 0.1, animations: {
             switch tag {
             case 0:
-              self?.allergyField.alpha = 1
+              self.allergyField.alpha = 1
             case 1:
-              self?.surgeryField.alpha = 1
+              self.surgeryField.alpha = 1
             case 2:
-              self?.liverField.alpha = 1
+              self.liverField.alpha = 1
             default:
               break
             }
-            self?.view.layoutIfNeeded()
+            self.view.layoutIfNeeded()
           })
         }
       }

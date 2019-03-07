@@ -3,6 +3,7 @@
     <entity name="Appointment" representedClassName=".Appointment" syncable="YES" codeGenerationType="category">
         <attribute name="assistant" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comparisonDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cost" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="procedure" optional="YES" attributeType="String" syncable="YES"/>
@@ -65,6 +66,33 @@
         <attribute name="ur8" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="thePatient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="dentition" inverseEntity="Patient" syncable="YES"/>
     </entity>
+    <entity name="Expenses" representedClassName=".Expenses" syncable="YES" codeGenerationType="category">
+        <attribute name="total" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="payment" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Payment" inverseName="totalExpenses" inverseEntity="Payment" syncable="YES"/>
+        <relationship name="theManager" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Manager" inverseName="expense" inverseEntity="Manager" syncable="YES"/>
+    </entity>
+    <entity name="Income" representedClassName=".Income" syncable="YES" codeGenerationType="category">
+        <attribute name="appointmentsNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="fixedFee" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="patientsNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="total" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="amounts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IncomeAmount" inverseName="totalIncome" inverseEntity="IncomeAmount" syncable="YES"/>
+        <relationship name="theManager" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Manager" inverseName="income" inverseEntity="Manager" syncable="YES"/>
+    </entity>
+    <entity name="IncomeAmount" representedClassName=".IncomeAmount" syncable="YES" codeGenerationType="category">
+        <attribute name="amount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="patientName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="thePatient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="payment" inverseEntity="Patient" syncable="YES"/>
+        <relationship name="totalIncome" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Income" inverseName="amounts" inverseEntity="Income" syncable="YES"/>
+    </entity>
+    <entity name="Manager" representedClassName=".Manager" syncable="YES" codeGenerationType="category">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="month" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="expense" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Expenses" inverseName="theManager" inverseEntity="Expenses" syncable="YES"/>
+        <relationship name="income" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Income" inverseName="theManager" inverseEntity="Income" syncable="YES"/>
+    </entity>
     <entity name="MedicalHistory" representedClassName=".MedicalHistory" syncable="YES" codeGenerationType="category">
         <attribute name="allergy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="chiefComplain" optional="YES" attributeType="String" syncable="YES"/>
@@ -87,12 +115,23 @@
         <attribute name="lastVisitDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nextVisitDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="paidAmount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalFees" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="appointments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Appointment" inverseName="thePatient" inverseEntity="Appointment" syncable="YES"/>
         <relationship name="dentition" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Dentition" inverseName="thePatient" inverseEntity="Dentition" syncable="YES"/>
         <relationship name="history" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MedicalHistory" inverseName="thePatinet" inverseEntity="MedicalHistory" syncable="YES"/>
+        <relationship name="payment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IncomeAmount" inverseName="thePatient" inverseEntity="IncomeAmount" syncable="YES"/>
         <relationship name="pictures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Picture" inverseName="thePatient" inverseEntity="Picture" syncable="YES"/>
+    </entity>
+    <entity name="Payment" representedClassName=".Payment" syncable="YES" codeGenerationType="category">
+        <attribute name="amount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="totalExpenses" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expenses" inverseName="payment" inverseEntity="Expenses" syncable="YES"/>
     </entity>
     <entity name="Picture" representedClassName=".Picture" syncable="YES" codeGenerationType="category">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -102,10 +141,15 @@
         <relationship name="thePatient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="pictures" inverseEntity="Patient" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Appointment" positionX="158.54296875" positionY="-41.75390625" width="128" height="163"/>
-        <element name="Dentition" positionX="-387.23046875" positionY="253.15625" width="128" height="838"/>
-        <element name="MedicalHistory" positionX="-223.375" positionY="252.15625" width="128" height="208"/>
-        <element name="Patient" positionX="-220.8125" positionY="-26.41015625" width="128" height="255"/>
-        <element name="Picture" positionX="-19.09375" positionY="264.44140625" width="128" height="118"/>
+        <element name="Appointment" positionX="-69.62890625" positionY="-4.85546875" width="128" height="178"/>
+        <element name="Dentition" positionX="-438.109375" positionY="-61.03515625" width="128" height="838"/>
+        <element name="Expenses" positionX="422.46484375" positionY="291.2734375" width="128" height="88"/>
+        <element name="Income" positionX="455.87109375" positionY="447.32421875" width="128" height="133"/>
+        <element name="IncomeAmount" positionX="199.53515625" positionY="521.51953125" width="128" height="133"/>
+        <element name="Manager" positionX="165.17578125" positionY="319.09765625" width="128" height="103"/>
+        <element name="MedicalHistory" positionX="-275.3984375" positionY="438.40234375" width="128" height="208"/>
+        <element name="Patient" positionX="-273.2109375" positionY="-62.0390625" width="128" height="298"/>
+        <element name="Payment" positionX="434.30859375" positionY="130.9921875" width="128" height="135"/>
+        <element name="Picture" positionX="-116.80078125" positionY="308.1953125" width="128" height="118"/>
     </elements>
 </model>

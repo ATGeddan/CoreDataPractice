@@ -10,15 +10,17 @@ import UIKit
 import CoreData
 import Photos
 
-class PatientVC: UIViewController, EditingPatientDelegate {
+class PatientVC: UIViewController, UITextFieldDelegate , EditingPatientDelegate {
   
+  @IBOutlet weak var addPaymentBtn: UIButton!
+  @IBOutlet weak var feesField: SkyFloatingLabelTextField!
   @IBOutlet weak var statusBtn: UIButton!
   @IBOutlet weak var imageFrame: UIImageView!
   @IBOutlet weak var nextVisitLabel: UILabel!
   @IBOutlet weak var lastVisitLabel: UILabel!
   @IBOutlet weak var addressLabel: UILabel!
   @IBOutlet weak var phoneLabel: UILabel!
-  @IBOutlet weak var genderLabel: UILabel!
+  @IBOutlet weak var feesLabel: UILabel!
   @IBOutlet weak var birthLabel: UILabel!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var patientPhoto: SLImageView!
@@ -36,6 +38,8 @@ class PatientVC: UIViewController, EditingPatientDelegate {
   lazy fileprivate var imagePicker = UIImagePickerController()
   var patient: Patient!
   fileprivate var uiStatus: uiOptions = .neither
+  fileprivate let container = AppDelegate.persistentContainer
+  fileprivate var theManager: Manager?
 
   fileprivate var dentitionType: dentTypes?
   fileprivate enum dentTypes {
@@ -52,11 +56,17 @@ class PatientVC: UIViewController, EditingPatientDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    feesField.delegate = self
     setupButtonsLayerAndEditButton()
     recieveDentition()
     recieveState()
-    recievePatientInfo(patient)
     setupPhotoDeletion()
+    getTheManager()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    recievePatientInfo(patient)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -74,7 +84,8 @@ class PatientVC: UIViewController, EditingPatientDelegate {
     birthLabel.text = formatDate(patient.birth!)
     phoneLabel.text = patient.phone
     addressLabel.text = patient.address
-    genderLabel.text = patient.gender
+    feesLabel.text = "\(patient.totalFees) L.E."
+    addPaymentBtn.isHidden = !(patient.totalFees > 0)
     lastVisitLabel.text = patient.lastVisitDate != nil ? formatDate(patient.lastVisitDate!) : "--/--/----"
     nextVisitLabel.text = patient.nextVisitDate != nil ? formatDate(patient.nextVisitDate!) : "--/--/----"
     switch calculateAge(birthDate: patient.birth!) {
@@ -206,12 +217,79 @@ class PatientVC: UIViewController, EditingPatientDelegate {
     }
   }
   
+  private func getTheManager() {
+    let context = container.viewContext
+    if let manager = Manager.getManagerForDate(date: Date(), context: context) {
+      theManager = manager
+    }
+  }
+  
+  @IBAction func payFees(_ sender: UIButton) {
+    feesField.isHidden = false
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    if textField.text != "0" && !(textField.text?.isEmpty)! {
+      presentConfirmationAlert()
+    } else {
+      textField.isHidden = true
+      textField.text = ""
+    }
+  }
+  
+  private func presentConfirmationAlert() {
+    let alert = UIAlertController(title: "Confirm \(feesField.text!) L.E ?", message: "Do you want to confirm this payment?", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: {[weak self] _ in
+      self?.confirmPayment()
+    }))
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {[weak self] _ in
+      self?.feesField.isHidden = true
+      self?.feesField.text = ""
+    }))
+    present(alert, animated: true)
+  }
+  
+  private func confirmPayment() {
+    guard let amount = feesField.text else {return}
+    let amountInt = Int32.parse(fromString: amount)
+    let newFees = patient.totalFees - amountInt
+    feesLabel.text = "\(newFees) L.E."
+    patient.totalFees -= amountInt
+    patient.paidAmount += amountInt
+    createPaymentAmount(theAmount: amountInt)
+    addPaymentBtn.isHidden = (amountInt == 0)
+    do {
+      try patient.managedObjectContext?.save()
+      feesField.isHidden = true
+      feesField.text = ""
+    } catch {
+      print(error)
+    }
+  }
+  
+  private func createPaymentAmount(theAmount: Int32) {
+    guard let context = patient.managedObjectContext else { return }
+    let payment = IncomeAmount(context: context)
+    payment.amount = theAmount
+    payment.thePatient = patient
+    payment.patientName = patient.name
+    payment.id = theManager?.id
+    payment.date = Date()
+    payment.totalIncome = theManager?.income
+    theManager?.income?.total += theAmount
+  }
+  
   func didEditPatient(_ patient: Patient) {
     recievePatientInfo(patient)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let destination = segue.destination as? AppointmentsTableViewController {
+    if let destination = segue.destination as? AppointmentsTableVC {
       destination.patient = patient
     }
     if let destination = segue.destination as? MedicalHistoryVC {
@@ -296,10 +374,10 @@ extension PatientVC {
   
   private func toggleDentition(completion: @escaping ()->Void) {
     let constraint = dentitionConstraint.constant
-    UIView.animate(withDuration: 0.3, animations: {[weak self] in
-      self?.dentitionConstraint.constant = constraint == 0 ? 280 : 0
-      self?.dentitionArrow.transform = CGAffineTransform(rotationAngle: constraint == 0 ? 90 * (.pi / 180) : 0)
-      self?.view.layoutIfNeeded()
+    UIView.animate(withDuration: 0.3, animations: {
+      self.dentitionConstraint.constant = constraint == 0 ? 280 : 0
+      self.dentitionArrow.transform = CGAffineTransform(rotationAngle: constraint == 0 ? 90 * (.pi / 180) : 0)
+      self.view.layoutIfNeeded()
     }, completion: { _ in
       completion()
     })
@@ -307,10 +385,10 @@ extension PatientVC {
   
   private func toggleInfo(completion: @escaping ()->Void) {
     let constraint = infoTopConstraint.constant
-    UIView.animate(withDuration: 0.3, animations: {[weak self] in
-      self?.infoTopConstraint.constant = constraint == -326 ? 0 : -326
-      self?.infoArrow.transform = CGAffineTransform(rotationAngle: constraint == -326 ? 90 * (.pi / 180) : 0)
-      self?.view.layoutIfNeeded()
+    UIView.animate(withDuration: 0.3, animations: {
+      self.infoTopConstraint.constant = constraint == -326 ? 0 : -326
+      self.infoArrow.transform = CGAffineTransform(rotationAngle: constraint == -326 ? 90 * (.pi / 180) : 0)
+      self.view.layoutIfNeeded()
     }, completion: { _ in
       completion()
     })
@@ -366,10 +444,10 @@ extension PatientVC: UIImagePickerControllerDelegate, UINavigationControllerDele
     
     if let chosenImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
       guard let imageData = chosenImage.jpegData(compressionQuality: 1) else {return}
-      patientPhoto.image = chosenImage
       patient.imageData = imageData
       do {
         try patient.managedObjectContext?.save()
+        patientPhoto.image = chosenImage
       } catch {
         presentBasicAlert(title: "Error", message: "Try setting the patient's photo again.")
       }
